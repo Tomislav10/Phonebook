@@ -6,7 +6,7 @@ import {Injectable} from '@angular/core';
 })
 export class InMemoryDataService implements InMemoryDbService {
   createDb() {
-    const mediaItems = [
+    const getPhonebookItems = [
       {id: 1, title: 'Neka pjema', type: 'Audio'},
       {id: 2, title: 'Sample audio', type: 'Audio'},
       {id: 3, title: 'Slika neka', type: 'Image'},
@@ -28,6 +28,6 @@ export class InMemoryDataService implements InMemoryDbService {
       {id: 19, title: 'Whats up', type: 'Video'},
       {id: 20, title: 'Hello there', type: 'Video'}
     ];
-    return {mediaItems};
+    return {getPhonebookItems};
   }
 }
