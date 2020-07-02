@@ -4,7 +4,8 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {ErrorPageComponent} from './error-page/error-page.component';
 import {PhonebookModule} from './phonebook/phonebook.module';
-import {GitUsersRoutingModule} from './phonebook/phonebook-routing.module';
+import {PhonebookRoutingModule} from './phonebook/phonebook-routing.module';
+import {MockServerModule} from './mock-server/mock-server.module';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import {GitUsersRoutingModule} from './phonebook/phonebook-routing.module';
   imports: [
     BrowserModule,
     PhonebookModule,
-    GitUsersRoutingModule,
+    MockServerModule,
+    PhonebookRoutingModule,
     AppRoutingModule
   ],
   providers: [],
