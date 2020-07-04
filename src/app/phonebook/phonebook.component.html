@@ -1,38 +1,13 @@
 <div class="phonebook-container">
   <div class="tabs">
     <span
-      (click)="listType = 'All contacts'"
-      [style.color]="listType === 'All contacts' ? '#2DA1AD' : '#BBC4C3'">
+      [routerLink]="['all-contacts']" [routerLinkActive]="['active-list']">
       All contacts</span>
     <div></div>
     <span
-      (click)="listType = 'My favorites'"
-      [style.color]="listType === 'My favorites' ? '#2DA1AD' : '#BBC4C3'">
+      [routerLink]="['my-favorites']" [routerLinkActive]="['active-list']">
       My favorites</span>
   </div>
 
-  <div class="divider"></div>
-
-  <div class="search">
-    <i class="fas fa-search"></i>
-    <input class="input-field" type="text">
-  </div>
-
-  <div class="phonebook-items">
-    <ng-container *ngIf="listType === 'All contacts'; else favorite">
-      <app-add-new-item></app-add-new-item>
-      <div *ngFor="let item of allPhonebookItems$ | async">
-        <app-phonebook-list-item
-          [item]="item">
-        </app-phonebook-list-item>
-      </div>
-    </ng-container>
-    <ng-template #favorite>
-      <div *ngFor="let item of favoritePhonebookItems$ | async">
-        <app-phonebook-list-item
-          [item]="item">
-        </app-phonebook-list-item>
-      </div>
-    </ng-template>
-  </div>
+  <router-outlet></router-outlet>
 </div>

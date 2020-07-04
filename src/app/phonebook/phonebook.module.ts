@@ -11,12 +11,18 @@ import {PhonebookEffects} from './store/phonebook.effects';
 import {phonebookReducer} from './store/phonebook.reducers';
 import {PhonebookResolverService} from './phonebook-resolver.service';
 import {AddNewItemComponent} from './add-new-item/add-new-item.component';
+import {CreateNewItemComponent} from './create-new-item/create-new-item.component';
+import {AllContactsListComponent} from './all-contacts-list/all-contacts-list.component';
+import {FavoriteItemsListComponent} from './favorite-items-list/favorite-items-list.component';
 
 @NgModule({
   declarations: [
+    AllContactsListComponent,
+    FavoriteItemsListComponent,
     PhonebookComponent,
     PhonebookListItemComponent,
-    AddNewItemComponent
+    AddNewItemComponent,
+    CreateNewItemComponent
   ],
   imports: [
     SharedModule,

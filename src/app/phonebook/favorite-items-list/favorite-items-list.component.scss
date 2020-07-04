@@ -1,0 +1,39 @@
+.phonebook-items {
+  margin: 0 auto;
+  width: 1170px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-column-gap: 30px;
+  grid-row-gap: 29px;
+}
+
+.search {
+  margin: 0 auto;
+  width: 540px;
+  height: 60px;
+  padding-top: 59px;
+  padding-bottom: 61px;
+  i {
+    padding: 23px 23px 19px 23px;
+    position: absolute;
+    height: 18px;
+    width: 17px;
+    color: #BBC4C3;
+  }
+  .input-field {
+    &:focus {
+      outline: 0;
+    }
+    font: 18px Lato;
+    color: #BBC4C3;
+    width: 540px;
+    height: 60px;
+    box-sizing: border-box;
+    border: 1px solid #EAEAEA;
+    border-radius: 4px;
+    background-color: #FFFFFF;
+    box-shadow: 0 2px 34px 0 #E3E3E3;
+    padding-left: 62px;
+    padding-right: 23px;
+  }
+}

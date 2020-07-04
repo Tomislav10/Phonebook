@@ -1,0 +1,13 @@
+<div class="search">
+  <i class="fas fa-search"></i>
+  <input class="input-field" type="text">
+</div>
+
+<div class="phonebook-items">
+    <app-add-new-item></app-add-new-item>
+    <div *ngFor="let item of allPhonebookItems$ | async">
+      <app-phonebook-list-item
+        [item]="item">
+      </app-phonebook-list-item>
+    </div>
+</div>

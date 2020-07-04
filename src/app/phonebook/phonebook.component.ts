@@ -1,9 +1,7 @@
 import {Component} from '@angular/core';
-import {select, Store} from '@ngrx/store';
-import {PhonebookState} from './store/phonebook.reducers';
-import {getAllPhonebookItems} from './store/phonebook.selectors';
-import {map} from 'rxjs/operators';
-import {PhonebookItem} from './interface/phonebookItem';
+import {ActivationEnd, NavigationEnd, Router} from '@angular/router';
+import {filter, map} from 'rxjs/operators';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-phonebook',
@@ -11,10 +9,13 @@ import {PhonebookItem} from './interface/phonebookItem';
   styleUrls: ['./phonebook.component.scss']
 })
 export class PhonebookComponent {
-  public allPhonebookItems$ = this.store.pipe(select(getAllPhonebookItems));
-  public favoritePhonebookItems$ = this.allPhonebookItems$.pipe(map((items: PhonebookItem[]) => items.filter((item) => item.favorite)));
 
-  public listType: 'All contacts' | 'My favorites' = 'All contacts';
+  public listType: Observable<'All contacts' | 'My favorites'>;
 
-  constructor(private store: Store<PhonebookState>) {}
+  constructor(private router: Router) {
+    this.listType = router.events.pipe(
+      filter(event => event instanceof ActivationEnd),
+      map((data: ActivationEnd) => data.snapshot.data.dataloaded)
+    );
+  }
 }
