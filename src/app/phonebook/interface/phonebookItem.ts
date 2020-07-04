@@ -1,5 +1,12 @@
 export interface PhonebookItem {
   id: number;
-  title: string;
+  name: string;
+  email: string;
+  favorite: boolean;
+  phoneNumbers: PhoneNumbers[];
+}
+
+interface PhoneNumbers {
   type: string;
+  number: string;
 }

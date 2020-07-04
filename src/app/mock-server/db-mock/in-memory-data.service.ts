@@ -1,32 +1,33 @@
 import {InMemoryDbService} from 'angular-in-memory-web-api';
 import {Injectable} from '@angular/core';
+import {PhonebookItem} from '../../phonebook/interface/phonebookItem';
 
 @Injectable({
   providedIn: 'root',
 })
 export class InMemoryDataService implements InMemoryDbService {
   createDb() {
-    const getPhonebookItems = [
-      {id: 1, title: 'Neka pjema', type: 'Audio'},
-      {id: 2, title: 'Sample audio', type: 'Audio'},
-      {id: 3, title: 'Slika neka', type: 'Image'},
-      {id: 4, title: 'Dobar video', type: 'Video'},
-      {id: 5, title: 'Super', type: 'Audio'},
-      {id: 6, title: 'hey', type: 'Video'},
-      {id: 7, title: 'Smile', type: 'Document'},
-      {id: 8, title: 'Hello', type: 'Audio'},
-      {id: 9, title: 'How Are you', type: 'Image'},
-      {id: 10, title: 'I am', type: 'Document'},
-      {id: 11, title: 'Cv', type: 'Audio'},
-      {id: 12, title: 'Jpeg slika', type: 'Image'},
-      {id: 13, title: 'Ovo je ok', type: 'Image'},
-      {id: 14, title: 'Good doc', type: 'Document'},
-      {id: 15, title: 'Exam vid', type: 'Video'},
-      {id: 16, title: 'This is something', type: 'Audio'},
-      {id: 17, title: 'something', type: 'Document'},
-      {id: 18, title: 'Yeah', type: 'Audio'},
-      {id: 19, title: 'Whats up', type: 'Video'},
-      {id: 20, title: 'Hello there', type: 'Video'}
+    const getPhonebookItems: PhonebookItem[] = [
+      {id: 1, name: 'Ivan Ivić', email: '123@123.da', favorite: true, phoneNumbers: [{type: 'home', number: '+3851111111'}]},
+      {id: 2, name: 'Tomislav Tomislav', email: '123@123.da', favorite: true, phoneNumbers: [{type: 'home', number: '+3851111111'}]},
+      {id: 3, name: 'John John', email: '123@123.da', favorite: true, phoneNumbers: [{type: 'home', number: '+3851111111'}]},
+      {id: 4, name: 'Ovaj Onaj', email: '123@123.da', favorite: true, phoneNumbers: [{type: 'home', number: '+3851111111'}]},
+      {id: 5, name: 'Marko Marković', email: '123@123.da', favorite: true, phoneNumbers: [{type: 'home', number: '+3851111111'}]},
+      {id: 6, name: 'Ante Antić', email: '123@123.da', favorite: true, phoneNumbers: [{type: 'home', number: '+3851111111'}]},
+      {id: 7, name: 'Da Da', email: '123@123.da', favorite: true, phoneNumbers: [{type: 'home', number: '+3851111111'}]},
+      {id: 8, name: 'Ne ne', email: '123@123.da', favorite: true, phoneNumbers: [{type: 'home', number: '+3851111111'}]},
+      {id: 9, name: 'How Are you', email: '123@123.da', favorite: true, phoneNumbers: [{type: 'home', number: '+3851111111'}]},
+      {id: 10, name: 'I am', email: '123@123.da', favorite: true, phoneNumbers: [{type: 'home', number: '+3851111111'}]},
+      {id: 11, name: 'Cv a', email: '123@123.da', favorite: true, phoneNumbers: [{type: 'home', number: '+3851111111'}]},
+      {id: 12, name: 'Jpeg slika', email: '123@123.da', favorite: true, phoneNumbers: [{type: 'home', number: '+3851111111'}]},
+      {id: 13, name: 'Ovo je ok', email: '123@123.da', favorite: true, phoneNumbers: [{type: 'home', number: '+3851111111'}]},
+      {id: 14, name: 'Good doc', email: '123@123.da', favorite: true, phoneNumbers: [{type: 'home', number: '+3851111111'}]},
+      {id: 15, name: 'Exam vid', email: '123@123.da', favorite: true, phoneNumbers: [{type: 'home', number: '+3851111111'}]},
+      {id: 16, name: 'This is something', email: '123@123.da', favorite: true, phoneNumbers: [{type: 'home', number: '+3851111111'}]},
+      {id: 17, name: 'something Good', email: '123@123.da', favorite: true, phoneNumbers: [{type: 'home', number: '+3851111111'}]},
+      {id: 18, name: 'Yeah yes', email: '123@123.da', favorite: true, phoneNumbers: [{type: 'home', number: '+3851111111'}]},
+      {id: 19, name: 'Whats up', email: '123@123.da', favorite: true, phoneNumbers: [{type: 'home', number: '+3851111111'}]},
+      {id: 20, name: 'Hello there', email: '123@123.da', favorite: true, phoneNumbers: [{type: 'home', number: '+3851111111'}]}
     ];
     return {getPhonebookItems};
   }
