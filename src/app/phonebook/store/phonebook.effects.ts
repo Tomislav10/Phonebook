@@ -4,7 +4,12 @@ import {PhonebookActions} from './phonebook-action-types';
 import {map, switchMap} from 'rxjs/operators';
 import {PhonebookItem} from '../interface/phonebookItem';
 import {HttpClient} from '@angular/common/http';
-import {ADD_ITEM_DETAILS, AddItem, DELETE_ITEM_DETAILS, GetItemsSuccess, UPDATE_ITEM_DETAILS} from './phonebook.actions';
+import {
+  ADD_ITEM_DETAILS,
+  DELETE_ITEM_DETAILS, GET_ITEM_REQUEST_DETAILS,
+  GetItemsSuccess,
+  UPDATE_ITEM_REQUEST_DETAILS
+} from './phonebook.actions';
 
 @Injectable()
 export class PhonebookEffects {
@@ -16,7 +21,7 @@ export class PhonebookEffects {
 
   private getItems = createEffect(
     () => this.action$.pipe(
-      ofType(PhonebookActions.getItemsRequest),
+      ofType<PhonebookActions.GetItemsRequest>(GET_ITEM_REQUEST_DETAILS),
       switchMap(() =>
         this.http.get<PhonebookItem[]>(this.getPhonebookItems)
           .pipe(
@@ -30,9 +35,9 @@ export class PhonebookEffects {
     () => this.action$.pipe(
       ofType<PhonebookActions.AddItem>(ADD_ITEM_DETAILS),
       switchMap((action) => {
-        return this.http.post(this.getPhonebookItems, action.data)
+        return this.http.post(this.getPhonebookItems, action.payload.data)
           .pipe(
-            map((data: PhonebookItem[]) => PhonebookActions.getItemsRequest)
+            map((data: PhonebookItem[]) => new PhonebookActions.GetItemsRequest)
           );
       })
     )
@@ -42,9 +47,9 @@ export class PhonebookEffects {
     () => this.action$.pipe(
       ofType<PhonebookActions.DeleteItem>(DELETE_ITEM_DETAILS),
       switchMap((action) => {
-        return this.http.delete(`this.getPhonebookItems/${action.id}`)
+        return this.http.delete(`${this.getPhonebookItems}/${action.payload.id}`)
           .pipe(
-            map((data: PhonebookItem[]) => PhonebookActions.getItemsRequest)
+            map((data: PhonebookItem[]) => new PhonebookActions.GetItemsRequest)
           );
       })
     )
@@ -52,11 +57,11 @@ export class PhonebookEffects {
 
   private updateItem = createEffect(
     () => this.action$.pipe(
-      ofType<PhonebookActions.UpdateItem>(UPDATE_ITEM_DETAILS),
+      ofType<PhonebookActions.UpdateItem>(UPDATE_ITEM_REQUEST_DETAILS),
       switchMap((action) => {
-        return this.http.put(`this.getPhonebookItems/${action.id}`, action.data)
+        return this.http.put(`${this.getPhonebookItems}/${action.payload.id}`, action.payload.data)
           .pipe(
-            map((data: PhonebookItem[]) => PhonebookActions.getItemsRequest)
+            map((data: PhonebookItem[]) => new PhonebookActions.GetItemsRequest)
           );
       })
     )

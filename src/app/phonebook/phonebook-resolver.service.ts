@@ -10,7 +10,7 @@ export class PhonebookResolverService implements Resolve<{}> {
   constructor(private readonly store: Store<PhonebookModule>) {}
 
   public resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-      this.store.dispatch(PhonebookActions.getItemsRequest());
+      this.store.dispatch(new PhonebookActions.GetItemsRequest());
 
       return of('NONE');
   }

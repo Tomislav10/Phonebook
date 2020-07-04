@@ -5,15 +5,20 @@ import {ErrorPageComponent} from './error-page/error-page.component';
 const routes: Routes = [
   {
     path: '',
-    pathMatch: 'full',
-    redirectTo: 'phonebook',
-  },
-  {
-    path: 'phonebook',
-    loadChildren: () =>
-      import('./phonebook/phonebook.module').then(
-        m => m.PhonebookModule
-      )
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'home',
+      },
+      {
+        path: 'home',
+        loadChildren: () =>
+          import('./phonebook/phonebook.module').then(
+            m => m.PhonebookModule
+          )
+      }
+    ]
   },
   {path: '**', component: ErrorPageComponent, data: {message: 'Oops page not found!'}}
 ];

@@ -1,5 +1,3 @@
-@import '../../styles/variables';
-
 .phonebook-container {
   display: grid;
 
@@ -10,26 +8,18 @@
     padding-bottom: 48px;
     padding-top: 50px;
 
-    .active-list {
-      color: $color-primary;
-    }
-
     span {
-        &:hover {
-          cursor: pointer;
-        }
-        &:focus {
-          outline: 0;
-        }
+        color: #2DA1AD;
+        font-family: Lato;
+        font-size: 18px;
+        font-weight: bold;
+        letter-spacing: 0;
+        line-height: 22px;
         text-align: center;
     }
 
     :nth-child(even) {
-      background-color: $color-secondary;
       justify-self: center;
-      margin-top: 4px;
-      height: 15px;
-      width: 1px;
     }
   }
 
@@ -38,6 +28,48 @@
     width: 1260px;
     justify-self: center;
     box-sizing: border-box;
-    border: 1px solid $color-primary;
+    border: 1px solid #2DA1AD;
+  }
+
+  .phonebook-items {
+    width: 1170px;
+    justify-self: center;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-column-gap: 30px;
+    grid-row-gap: 29px;
+  }
+
+  .search {
+    width: 540px;
+    height: 60px;
+    justify-self: center;
+    padding-top: 59px;
+    padding-bottom: 61px;
+    i {
+      padding: 23px 23px 19px 23px;
+      position: absolute;
+      height: 18px;
+      width: 17px;
+      color: #BBC4C3;
+    }
+    .input-field {
+      &:focus {
+        outline-color: #2DA1AD;
+      }
+      font: 18px Lato;
+      color: #BBC4C3;
+      width: 540px;
+      height: 60px;
+      box-sizing: border-box;
+      border: 1px solid #EAEAEA;
+      border-radius: 4px;
+      background-color: #FFFFFF;
+      box-shadow: 0 2px 34px 0 #E3E3E3;
+      padding-left: 62px;
+      padding-right: 23px;
+    }
   }
 }
+
+// grid-auto-rows: minmax(100px, auto);

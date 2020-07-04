@@ -1,13 +1,22 @@
 <div class="phonebook-container">
   <div class="tabs">
-    <span class="tab-text"
-      [routerLink]="['all-contacts']" [routerLinkActive]="['active-list']">
-      All contacts</span>
-    <div></div>
-    <span class="tab-text"
-      [routerLink]="['my-favorites']" [routerLinkActive]="['active-list']">
-      My favorites</span>
+    <span>All contacts</span>
+    <span>|</span>
+    <span>My favorites</span>
   </div>
+
   <div class="divider"></div>
-  <router-outlet></router-outlet>
+
+  <div class="search">
+    <i class="fas fa-search"></i>
+    <input class="input-field" type="text">
+  </div>
+
+  <div class="phonebook-items">
+    <div *ngFor="let item of phonebookItems$ | async">
+      <app-phonebook-list-item
+        [item]="item">
+      </app-phonebook-list-item>
+    </div>
+  </div>
 </div>

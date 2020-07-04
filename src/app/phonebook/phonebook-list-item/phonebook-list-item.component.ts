@@ -1,5 +1,8 @@
 import {Component, Input} from '@angular/core';
 import {PhonebookItem} from '../interface/phonebookItem';
+import {Store} from '@ngrx/store';
+import {PhonebookState} from '../store/phonebook.reducers';
+import {PhonebookActions} from '../store/phonebook-action-types';
 
 @Component({
   selector: 'app-phonebook-list-item',
@@ -7,5 +10,13 @@ import {PhonebookItem} from '../interface/phonebookItem';
   styleUrls: ['./phonebook-list-item.component.scss']
 })
 export class PhonebookListItemComponent {
+  constructor(private store: Store<PhonebookState>) {}
+
   @Input() item: PhonebookItem;
+
+  public setItemFavorite() {
+    this.store.dispatch(new PhonebookActions.UpdateItem(
+      {id: this.item.id, data: {...this.item, favorite: !this.item.favorite }})
+    );
+  }
 }
