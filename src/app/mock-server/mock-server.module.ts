@@ -10,7 +10,6 @@ import {HttpClientInMemoryWebApiModule} from 'angular-in-memory-web-api';
       InMemoryDataService, { dataEncapsulation: false }
     )
   ],
-  providers: [],
   bootstrap: []
 })
 export class MockServerModule { }

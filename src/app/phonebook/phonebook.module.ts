@@ -3,10 +3,12 @@ import {NgModule} from '@angular/core';
 import {PhonebookComponent} from './phonebook.component';
 import {CommonModule} from '@angular/common';
 import {HttpClientModule} from '@angular/common/http';
+import {PhonebookListItemComponent} from './phonebook-list-item/phonebook-list-item.component';
 
 @NgModule({
   declarations: [
-    PhonebookComponent
+    PhonebookComponent,
+    PhonebookListItemComponent
   ],
   imports: [
     BrowserModule,
