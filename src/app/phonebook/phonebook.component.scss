@@ -1,0 +1,28 @@
+.wrapper > div {
+  background-color: aquamarine;
+  padding: 1em;
+}
+
+.wrapper > div:nth-child(odd) {
+  background-color: red;
+}
+
+.wrapper {
+  display: grid;
+  /* grid-template-columns: 1fr 1fr 1fr; */
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 1em;
+  /*
+  grid-auto-rows: 100px 50px;
+  */
+  grid-auto-rows: minmax(100px, auto);
+}
+
+.nested {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.nested > div {
+  border: #333 1px solid;
+}

@@ -1,0 +1,14 @@
+$app-fonts-path: '../font/Lato';
+
+/* Webfont: LatoLatin-Regular */
+@font-face {
+  font-family: 'Lato';
+  src: url(#{$app-fonts-path}/Lato-Regular.eot); /* IE9 Compat Modes */
+  src: url(#{$app-fonts-path}/Lato-Regular.eot?#iefix) format('embedded-opentype'), /* IE6-IE8 */
+  url(#{$app-fonts-path}/Lato-Regular.woff2) format('woff2'), /* Modern Browsers */
+  url(#{$app-fonts-path}/Lato-Regular.woff) format('woff'), /* Modern Browsers */
+  url(#{$app-fonts-path}/Lato-Regular.ttf) format('truetype');
+  font-style: normal;
+  font-weight: normal;
+  text-rendering: optimizeLegibility;
+}

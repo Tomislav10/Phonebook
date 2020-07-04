@@ -1,0 +1,44 @@
+.item-container {
+  box-sizing: border-box;
+  height: 150px;
+  width: 270px;
+  border: 1px solid rgba(187,196,195,0.4);
+  border-radius: 4px;
+
+  display: grid;
+  grid-template-columns: 72px 126px 72px;
+  grid-auto-rows: minmax(105px, auto);
+
+  .favorites {
+    padding: 15px 0 0 17px;
+    i {
+      height: 14px;
+      width: 15px;
+      color: #BBC4C3;
+    }
+  }
+
+  .profile-photo {
+    text-align: center;
+    padding-top: 26px;
+    img {
+      border-radius: 50%;
+      box-sizing: border-box;
+      height: 66px;
+      width: 66px;
+      border: 3px solid rgba(187, 196, 195, 0.3);
+    }
+  }
+
+  .actions {
+  }
+
+  .name {
+    grid-column: 1/4;
+    color: #BBC4C3;
+    font-family: Lato;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+  }
+}
