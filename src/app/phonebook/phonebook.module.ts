@@ -10,11 +10,13 @@ import {EffectsModule} from '@ngrx/effects';
 import {PhonebookEffects} from './store/phonebook.effects';
 import {phonebookReducer} from './store/phonebook.reducers';
 import {PhonebookResolverService} from './phonebook-resolver.service';
+import {AddNewItemComponent} from './add-new-item/add-new-item.component';
 
 @NgModule({
   declarations: [
     PhonebookComponent,
-    PhonebookListItemComponent
+    PhonebookListItemComponent,
+    AddNewItemComponent
   ],
   imports: [
     SharedModule,

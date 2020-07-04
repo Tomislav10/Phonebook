@@ -20,6 +20,7 @@
 
   <div class="phonebook-items">
     <ng-container *ngIf="listType === 'All contacts'; else favorite">
+      <app-add-new-item></app-add-new-item>
       <div *ngFor="let item of allPhonebookItems$ | async">
         <app-phonebook-list-item
           [item]="item">
