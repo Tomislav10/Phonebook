@@ -1,0 +1,8 @@
+<div class="item-container">
+  <div class="favorites">
+    <i (click)="item.favorite = !item.favorite" [ngClass]="item.favorite ? 'fas fa-heart' : 'far fa-heart'"></i>
+  </div>
+  <div class="profile-photo"><img src="https://www.cromoda.com/layout/i/content/548060501393463.jpg"/></div>
+  <div class="actions"></div>
+  <div class="name">{{ item.name }}</div>
+</div>
