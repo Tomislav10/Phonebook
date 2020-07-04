@@ -1,28 +1,43 @@
-.wrapper > div {
-  background-color: aquamarine;
-  padding: 1em;
-}
+@import '../../styles/variables';
 
-.wrapper > div:nth-child(odd) {
-  background-color: red;
-}
-
-.wrapper {
+.phonebook-container {
   display: grid;
-  /* grid-template-columns: 1fr 1fr 1fr; */
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 1em;
-  /*
-  grid-auto-rows: 100px 50px;
-  */
-  grid-auto-rows: minmax(100px, auto);
-}
 
-.nested {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-}
+  .tabs {
+    display: grid;
+    justify-self: center;
+    grid-template-columns: auto 62px auto;
+    padding-bottom: 48px;
+    padding-top: 50px;
 
-.nested > div {
-  border: #333 1px solid;
+    .active-list {
+      color: $color-primary;
+    }
+
+    span {
+        &:hover {
+          cursor: pointer;
+        }
+        &:focus {
+          outline: 0;
+        }
+        text-align: center;
+    }
+
+    :nth-child(even) {
+      background-color: $color-secondary;
+      justify-self: center;
+      margin-top: 4px;
+      height: 15px;
+      width: 1px;
+    }
+  }
+
+  .divider {
+    height: 2px;
+    width: 1260px;
+    justify-self: center;
+    box-sizing: border-box;
+    border: 1px solid $color-primary;
+  }
 }

@@ -1,0 +1,69 @@
+<div class="item-container">
+  <div class="profile-photo">
+    <label for="file-upload" class="upload-image clickable"
+           [style.background-color]="image ? 'rgba(0, 0, 0, 0.4)' : 'rgba(45,161,173,0.4)'">
+      <img src="../assets/svg-icons/upload.svg" class="upload-icon">
+      <img *ngIf="image" [src]="image" class="image">
+      <input id="file-upload" hidden type="file" accept=".png, .jpg, .jpeg" (change)="updateProfilePhoto($event)"/>
+    </label>
+    <div class="overlay-svg" *ngIf="image" (click)="removePhoto()">
+      <img src="../assets/svg-icons/white-x.svg">
+    </div>
+  </div>
+
+  <div class="form-container">
+    <div class="actions-section">
+      <img class="clickable" src="../assets/svg-icons/back-button.svg" [routerLink]="'../../'">
+      <div *ngIf="mode.edit" (click)="openDialog('delete-confirmation' + currentContact.id)">
+        <span class="delete-icon-text">Delete</span>
+        <img src="../assets/svg-icons/trash.svg">
+      </div>
+    </div>
+    <form [formGroup]="contactForm">
+      <div class="divider"></div>
+
+      <div class="input-field">
+        <app-input-field
+          formControlName="name"
+          [required]="true"
+          label="full name"
+          [imgSrc]="'../../../assets/svg-icons/user.svg'">
+        </app-input-field>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="input-field">
+        <app-input-field
+          formControlName="email"
+          [required]="false"
+          [email]="true"
+          label="email"
+          [imgSrc]="'../../../assets/svg-icons/mail.svg'">
+        </app-input-field>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="input-field">
+        <app-multiple-input-fields formControlName="contacts"></app-multiple-input-fields>
+      </div>
+
+      <div class="button-container">
+        <button
+          class="clickable button-text"
+          type="button"
+          [routerLink]="mode.create ? '../' : '../../'"
+        >Cancel</button>
+        <button
+          class="clickable button-text"
+          type="button"
+          (click)="submitForm()"
+        >Save</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<app-confirmation-dialog *ngIf="mode.edit" [id]="'delete-confirmation' + (currentContact ? currentContact.id : '')" (confirmDelete)="confirmDelete($event)">
+</app-confirmation-dialog>

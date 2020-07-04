@@ -1,0 +1,120 @@
+@import '../../../styles/variables';
+
+.item-container {
+  margin: 0 auto;
+  display: grid;
+  width: 847px;
+  grid-template-columns: 217px 630px;
+
+  .profile-photo {
+    position: relative;
+    margin-top: 57px;
+    .overlay-svg {
+      position: absolute;
+      height: 186px;
+      width: 186px;
+      z-index: 50;
+      border-radius: 50%;
+      box-sizing: border-box;
+      border: 3px solid rgba(187,196,195,0.3);
+      background-color: rgba(0,0,0,0.4);
+      img {
+        margin: 86px 0 0 86px;
+      }
+    }
+
+    .upload-image {
+      position: absolute;
+      height: 186px;
+      width: 186px;
+      border-radius: 50%;
+      box-sizing: border-box;
+
+      .upload-icon {
+        margin: 83px 0 0 82px;
+        height: 21px;
+        width: 20px;
+      }
+
+      .image {
+        position: absolute;
+        left: 0;
+        margin: 3px 0 0 3px;
+        border-radius: 50%;
+        height: 180px;
+        width: 180px;
+      }
+    }
+  }
+
+
+  .form-container {
+    margin-top: 112px;
+    width: 630px;
+    display: grid;
+    grid-template-rows: 39px auto;
+
+    .actions-section {
+      display: grid;
+      grid-template-columns: 559px auto;
+
+      img {
+        padding-left: 8px;
+      }
+      div {
+        display: flex;
+        &:hover {
+          cursor: pointer;
+          filter: $color-primary-filter;
+        }
+        span {
+          width: 30px;
+        }
+        img {
+          padding-left: 0;
+          margin: -23px 0 0 26px;
+        }
+      }
+    }
+
+    form {
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: 2px 148px 2px 148px 2px auto;
+
+      .divider {
+        height: 2px;
+        width: 630px;
+        background-color: $color-primary;
+      }
+
+      .input-field {
+        padding-top: 17px;
+        padding-bottom: 30px;
+      }
+
+      .button-container {
+        display: grid;
+        grid-template-columns: repeat(2, 50%);
+        margin-bottom: 80px;
+
+        button {
+          height: 42px;
+          width: 160px;
+          border-radius: 28.5px;
+          text-align: center;
+        }
+
+        button:first-child {
+          justify-self: start;
+          background-color: $color-secondary;
+        }
+
+        button:last-child {
+          justify-self: end;
+          background-color: $color-primary;
+        }
+      }
+    }
+  }
+}

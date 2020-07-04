@@ -1,0 +1,25 @@
+<div class="item-container" *ngIf="contact$ | async; let contact">
+  <img class="upload-image" [src]="contact.img || 'https://www.nik.hr/storage/app/uploads/storage/images/20522/thumbs/20522.jpg'">
+  <div class="form-container">
+    <div class="actions-section">
+      <img class="clickable" src="../assets/svg-icons/back-button.svg" [routerLink]="'../../'">
+      <span class="contact-title-text">{{ contact.name }}</span>
+      <i class="clickable" (click)="setItemFavorite(contact)" [ngClass]="contact.favorite ? 'fas fa-heart' : 'far fa-heart'"></i>
+      <img class="clickable" src="../assets/svg-icons/edit.svg" [routerLink]="['../../edit', contact.id]">
+    </div>
+    <div class="divider"></div>
+    <div class="contact-info">
+      <img src="../assets/svg-icons/mail.svg">
+      <span class="label-text">email</span>
+      <span class="details-text">{{ contact.email }}</span>
+    </div>
+    <div class="contact-info">
+      <img class="phone-numbers" src="../assets/svg-icons/phone.svg">
+      <span class="label-text phone-numbers">numbers</span>
+      <ng-container *ngFor="let numbers of contact.contacts">
+        <span class="contact-label-text">{{ numbers.label }}</span>
+        <span class="contact-details-text">{{ numbers.number }}</span>
+      </ng-container>
+    </div>
+  </div>
+</div>

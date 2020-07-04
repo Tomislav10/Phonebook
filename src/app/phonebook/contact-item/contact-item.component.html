@@ -1,0 +1,14 @@
+<div class="item-container clickable" [routerLink]="['../view', contact.id]">
+  <div class="favorites">
+    <i class="clickable" (click)="setItemFavorite()" [ngClass]="contact.favorite ? 'fas fa-heart' : 'far fa-heart'"></i>
+  </div>
+  <div class="profile-photo"><img [src]="contact.img || 'https://www.nik.hr/storage/app/uploads/storage/images/20522/thumbs/20522.jpg'"/></div>
+  <div class="actions">
+    <img class="clickable" src="../assets/svg-icons/edit.svg" [routerLink]="['../edit', contact.id]">
+    <img class="clickable" src="../assets/svg-icons/trash.svg" (click)="$event.stopPropagation(); openDialog('delete-confirmation' + contact.id)">
+  </div>
+  <span class="item-title-text name">{{ contact.name }}</span>
+</div>
+
+<app-confirmation-dialog [id]="'delete-confirmation' + contact.id" (confirmDelete)="confirmDelete()">
+</app-confirmation-dialog>

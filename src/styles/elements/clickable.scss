@@ -1,0 +1,40 @@
+@import "../variables";
+
+.clickable {
+  &:focus {
+    outline: 0;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  @at-root {
+    img#{&}, i#{&} {
+      &:hover {
+        filter: $color-primary-filter;
+      }
+    }
+
+    div#{&} {
+      &:hover {
+        border: 1px solid $color-primary;
+      }
+    }
+
+    button#{&} {
+      outline: 0;
+      border: none;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    .new-item-container#{&} {
+      &:hover {
+        border: none;
+        opacity: 1;
+      }
+    }
+  }
+}

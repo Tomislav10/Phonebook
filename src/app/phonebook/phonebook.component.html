@@ -1,1 +1,13 @@
-<app-phonebook-list-item></app-phonebook-list-item>
+<div class="phonebook-container">
+  <div class="tabs">
+    <span class="tab-text"
+      [routerLink]="['all-contacts']" [routerLinkActive]="['active-list']">
+      All contacts</span>
+    <div></div>
+    <span class="tab-text"
+      [routerLink]="['my-favorites']" [routerLinkActive]="['active-list']">
+      My favorites</span>
+  </div>
+  <div class="divider"></div>
+  <router-outlet></router-outlet>
+</div>

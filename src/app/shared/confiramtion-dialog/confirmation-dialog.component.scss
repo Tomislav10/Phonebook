@@ -1,0 +1,75 @@
+@import '../../../styles/variables';
+
+.dialog {
+  position: fixed;
+  top: 331px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+  overflow: auto;
+  margin: 0 auto;
+
+  height: 240px;
+  width: 480px;
+  border-radius: 4px;
+  background-color: #FFFFFF;
+  box-shadow: 0 0 14px 0 rgba(99, 109, 255, 0.27);
+
+  .dialog-body {
+    display: grid;
+    grid-template-rows: 59px 2px 107px auto;
+
+    .title {
+      padding-top: 20px;
+      padding-left: 30px;
+    }
+
+    .divider {
+      box-sizing: border-box;
+      height: 2px;
+      width: 480px;
+      border: 1px solid #DCDCDC;
+    }
+
+    .content {
+      grid-column: 1/2;
+      padding-top: 29px;
+      padding-bottom: 50px;
+      margin: 0 auto;
+    }
+
+    .button-container {
+      display: grid;
+      grid-template-columns: repeat(2, 50%);
+
+      button {
+        height: 42px;
+        width: 160px;
+        border-radius: 28.5px;
+        text-align: center;
+      }
+
+      button:first-child {
+        justify-self: center;
+        background-color: $color-secondary;
+      }
+
+      button:last-child {
+        justify-self: center;
+        background-color: $color-primary;
+      }
+    }
+  }
+}
+
+.dialog-background {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  opacity: 0.4;
+  background-color: #000000;
+  z-index: 900;
+}
