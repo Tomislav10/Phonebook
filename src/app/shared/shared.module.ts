@@ -1,9 +1,9 @@
 import {NgModule} from '@angular/core';
-import {AdminLayoutComponent} from './layout/admin-layout.component';
+import {HeaderComponent} from './layout/header.component';
 
 @NgModule({
   imports: [],
-  declarations: [AdminLayoutComponent],
-  exports: [AdminLayoutComponent]
+  declarations: [HeaderComponent],
+  exports: [HeaderComponent]
 })
 export class SharedModule {}

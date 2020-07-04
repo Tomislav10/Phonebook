@@ -9,7 +9,9 @@
     padding-top: 50px;
 
     span {
-        color: #2DA1AD;
+        &:hover {
+          cursor: pointer;
+        }
         font-family: Lato;
         font-size: 18px;
         font-weight: bold;
@@ -19,7 +21,11 @@
     }
 
     :nth-child(even) {
+      background-color: #BBC4C3;
       justify-self: center;
+      margin-top: 4px;
+      height: 15px;
+      width: 1px;
     }
   }
 
