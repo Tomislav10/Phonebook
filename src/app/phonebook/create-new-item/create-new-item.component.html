@@ -1,1 +1,35 @@
-dsayvsdvsdvdas
+<div class="item-container">
+  <div class="upload-image"></div>
+
+  <div class="form-container">
+    <div class="actions-section">
+      <img src="../assets/svg-icons/back-button.svg" [routerLink]="'../'">
+      <span>Delete</span>
+      <img src="../assets/svg-icons/trash.svg">
+    </div>
+    <form>
+      <div class="divider"></div>
+
+      <div class="input-field">
+        <app-input-field></app-input-field>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="input-field">
+        <app-input-field></app-input-field>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="input-field">
+        <app-multiple-input-fields></app-multiple-input-fields>
+      </div>
+
+      <div class="button-container">
+        <button>Cancel</button>
+        <button>Save</button>
+      </div>
+    </form>
+  </div>
+</div>
