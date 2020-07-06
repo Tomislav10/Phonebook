@@ -1,6 +1,10 @@
 .item-container {
-  :hover {
+  &:focus {
+    outline: 0;
+  }
+  &:hover {
     cursor: pointer;
+    border: 1px solid #2DA1AD;
   }
   box-sizing: border-box;
   height: 150px;

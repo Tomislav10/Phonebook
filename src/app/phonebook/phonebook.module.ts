@@ -14,6 +14,7 @@ import {AddNewItemComponent} from './add-new-item/add-new-item.component';
 import {CreateNewItemComponent} from './create-new-item/create-new-item.component';
 import {AllContactsListComponent} from './all-contacts-list/all-contacts-list.component';
 import {FavoriteItemsListComponent} from './favorite-items-list/favorite-items-list.component';
+import {ViewItemComponent} from './view-item/view-item.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import {FavoriteItemsListComponent} from './favorite-items-list/favorite-items-l
     PhonebookComponent,
     PhonebookListItemComponent,
     AddNewItemComponent,
-    CreateNewItemComponent
+    CreateNewItemComponent,
+    ViewItemComponent
   ],
   imports: [
     SharedModule,

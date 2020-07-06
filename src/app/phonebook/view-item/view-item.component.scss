@@ -1,0 +1,95 @@
+.item-container {
+  margin: 0 auto;
+  display: grid;
+  width: 847px;
+  grid-template-columns: 217px 630px;
+
+  .upload-image {
+    grid-row: 1/10;
+    margin-top: 57px;
+    box-sizing: border-box;
+    border-radius: 50%;
+    height: 186px;
+    width: 186px;
+    border: 3px solid rgba(187, 196, 195, 0.3);
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+
+  .form-container {
+    margin-top: 112px;
+    width: 630px;
+    display: grid;
+    grid-template-rows: 52px 72px;
+
+    .actions-section {
+      display: grid;
+      grid-template-columns: 45px 512px 59px 21px;
+
+      i {
+        color: #BBC4C3;
+      }
+
+      img:nth-child(1) {
+        &:hover {
+          cursor: pointer;
+        }
+
+        outline: 0;
+        padding-left: 8px;
+      }
+
+      span {
+        margin-top: -10px;
+        color: #BBC4C3;
+        font-family: Lato-Bold;
+        font-size: 28px;
+      }
+
+    }
+
+    .divider {
+      height: 2px;
+      width: 630px;
+      background-color: #2DA1AD;
+    }
+
+    .contact-info {
+      display: grid;
+      padding-left: 65px;
+      grid-template-columns: 3fr;
+      grid-template-columns: 30px 95px auto;
+
+      img {
+        filter: invert(52%) sepia(44%) saturate(699%) hue-rotate(137deg) brightness(95%) contrast(81%);
+      }
+
+      span {
+        color: #2DA1AD;
+        font-family: Lato-Bold;
+      }
+
+      span:last-child {
+          color: #BBC4C3;
+          font-family: Lato;
+      }
+    }
+
+    .contact-info:last-child {
+      padding-top: 71px;
+      grid-template-columns: 30px 95px 89px auto;
+      grid-template-rows: repeat(7, 60px);
+
+      .phone-numbers {
+        color: #2DA1AD;
+        font-family: Lato-Bold;
+        grid-row: 1/10;
+      }
+
+      span {
+        font-size: 16px;
+        color: #BBC4C3;
+        font-family: Lato;
+      }
+    }
+  }
+}

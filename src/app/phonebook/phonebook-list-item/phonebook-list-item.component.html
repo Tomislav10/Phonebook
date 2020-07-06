@@ -1,4 +1,4 @@
-<div class="item-container">
+<div class="item-container" [routerLink]="['../view', item.id]">
   <div class="favorites">
     <i (click)="setItemFavorite()" [ngClass]="item.favorite ? 'fas fa-heart' : 'far fa-heart'"></i>
   </div>

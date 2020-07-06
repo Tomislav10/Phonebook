@@ -5,6 +5,7 @@ import {PhonebookResolverService} from './phonebook-resolver.service';
 import {CreateNewItemComponent} from './create-new-item/create-new-item.component';
 import {AllContactsListComponent} from './all-contacts-list/all-contacts-list.component';
 import {FavoriteItemsListComponent} from './favorite-items-list/favorite-items-list.component';
+import {ViewItemComponent} from './view-item/view-item.component';
 
 const routes: Routes = [
     {
@@ -22,6 +23,11 @@ const routes: Routes = [
           component: FavoriteItemsListComponent
         }
       ]
+    },
+    {
+      path: 'view/:id',
+      component: ViewItemComponent,
+      resolve: {dataLoaded: PhonebookResolverService}
     },
     {
       path: 'create',
