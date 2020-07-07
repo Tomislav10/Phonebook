@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {select, Store} from '@ngrx/store';
 import {getAllPhonebookItems} from '../store/phonebook.selectors';
 import {PhonebookState} from '../store/phonebook.reducers';
+import {DialogService} from '../../shared/confiramtion-dialog/dialog.service';
 
 @Component({
   selector: 'app-all-contacts-list',
@@ -11,5 +12,13 @@ import {PhonebookState} from '../store/phonebook.reducers';
 export class AllContactsListComponent {
   public allPhonebookItems$ = this.store.pipe(select(getAllPhonebookItems));
 
-  constructor(private store: Store<PhonebookState>) {}
+  constructor(
+    private store: Store<PhonebookState>,
+    private dialogService: DialogService
+  ) {}
+
+  openDialogUpload(id: string) {
+    console.log(id);
+    this.dialogService.open(id);
+  }
 }
