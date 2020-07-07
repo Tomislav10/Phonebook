@@ -1,4 +1,5 @@
-import {PhonebookState} from '../phonebook/store/phonebook.reducers';
+import {PhonebookState} from '../phonebook/store';
+
 
 export interface AppState {
   phonebookReducer: PhonebookState;

@@ -6,8 +6,8 @@
 <div class="phonebook-items">
     <app-add-new-item></app-add-new-item>
     <div *ngFor="let item of filteredPhonebookItems$ | async">
-      <app-phonebook-list-item
+      <app-contact-item
         [item]="item">
-      </app-phonebook-list-item>
+      </app-contact-item>
     </div>
 </div>

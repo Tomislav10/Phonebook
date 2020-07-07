@@ -23,7 +23,12 @@
       width: 300px;
     }
 
-    &.number {
+    &.extend {
+      grid-column: 2/4;
+      width: 300px;
+    }
+
+    &.shortened {
       width: 240px;
     }
 

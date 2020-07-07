@@ -4,15 +4,14 @@ import {NgForm} from '@angular/forms';
 import {combineLatest, Observable, of} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {PhonebookItem} from '../../shared/interface/phonebookItem';
-import {PhonebookState} from '../store/phonebook.reducers';
-import {getFavoritePhonebookItems} from '../store/phonebook.selectors';
+import {getFavoritePhonebookItems, PhonebookState} from '../store';
 
 @Component({
-  selector: 'app-favorite-items-list',
-  templateUrl: './favorite-items-list.component.html',
-  styleUrls: ['./favorite-items-list.component.scss']
+  selector: 'app-favorite-contacts-list',
+  templateUrl: './favorite-contacts-list.component.html',
+  styleUrls: ['./favorite-contacts-list.component.scss']
 })
-export class FavoriteItemsListComponent implements OnInit {
+export class FavoriteContactsListComponent implements OnInit {
   @ViewChild('form') ngForm: NgForm;
 
   public readonly favoritePhonebookItems$ = this.store.pipe(select(getFavoritePhonebookItems));

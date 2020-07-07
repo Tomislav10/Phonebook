@@ -1,5 +1,9 @@
 <div class="item-container">
-  <img class="upload-image" [src]="(da | async).img">
+  <img class="upload-image" [src]="(currentContact$ | async).img" *ngIf="mode.edit; else createMode">
+  <ng-template #createMode>
+    <img class="upload-image">
+  </ng-template>
+
 
   <div class="form-container">
     <div class="actions-section">
@@ -13,13 +17,13 @@
       <div class="divider"></div>
 
       <div class="input-field">
-        <app-input-field formControlName="name" label="full name" [imgSrc]="'../../../assets/svg-icons/user.svg'"></app-input-field>
+        <app-input-field formControlName="name" [required]="true" label="full name" [imgSrc]="'../../../assets/svg-icons/user.svg'"></app-input-field>
       </div>
 
       <div class="divider"></div>
 
       <div class="input-field">
-        <app-input-field formControlName="email" label="email" [imgSrc]="'../../../assets/svg-icons/mail.svg'"></app-input-field>
+        <app-input-field formControlName="email" [required]="false" label="email" [imgSrc]="'../../../assets/svg-icons/mail.svg'"></app-input-field>
       </div>
 
       <div class="divider"></div>
@@ -29,8 +33,13 @@
       </div>
 
       <div class="button-container">
-        <button>Cancel</button>
-        <button [disabled]="true">Save</button>
+        <button
+          [routerLink]="mode.create ? '../' : '../../'"
+        >Cancel</button>
+        <button
+          [disabled]="!contactItemForm.valid"
+          (click)="submitForm()"
+        >Save</button>
       </div>
     </form>
   </div>

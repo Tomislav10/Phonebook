@@ -31,9 +31,16 @@ export class InputFieldComponent implements ControlValueAccessor, Validator {
 
   @Input() public label: string;
 
+  @Input()
+  public set required(value: boolean) {
+    if (value) {
+      this.field.setValidators([Validators.required]);
+    }
+  }
+
   @Input() public imgSrc: string;
 
-  public readonly field: FormControl = new FormControl('', [Validators.required]);
+  public readonly field: FormControl = new FormControl('', []);
 
   constructor(private readonly controlContainer: ControlContainer) {
   }

@@ -38,17 +38,24 @@ export class MultipleInputFieldsComponent implements ControlValueAccessor, Valid
   constructor(private readonly controlContainer: ControlContainer) {
   }
 
-  public writeValue(redirectUris: PhoneNumbers[] | undefined) {
+  public writeValue(value: PhoneNumbers[] | undefined) {
     const arr: AbstractControl[] = [];
-    if (redirectUris) {
-      redirectUris.map(contact => {
+    if (value) {
+      value.map(contact => {
         return arr.push(
           new FormGroup({
-            number: new FormControl(contact.type, [Validators.required]),
-            cell: new FormControl(contact.number, [Validators.required])
+            number: new FormControl(contact.number, [Validators.required]),
+            label: new FormControl(contact.label, [Validators.required])
           })
-          );
+        );
       });
+    } else {
+      arr.push(
+        new FormGroup({
+          number: new FormControl('', [Validators.required]),
+          label: new FormControl('', [Validators.required])
+        })
+      );
     }
 
     while (this.form.length !== 0) {
@@ -57,10 +64,6 @@ export class MultipleInputFieldsComponent implements ControlValueAccessor, Valid
 
     if (arr && arr.length) {
       arr.forEach(c => this.form.push(c));
-    }
-
-    if (this.controlContainer.control) {
-      this.controlContainer.control.markAsPristine();
     }
   }
 
@@ -79,20 +82,13 @@ export class MultipleInputFieldsComponent implements ControlValueAccessor, Valid
   public addNewContact() {
     this.form.push(
       new FormGroup({
-        number: new FormControl('', [Validators.required]),
-        cell: new FormControl('', [Validators.required])
+        number: new FormControl('', [Validators.required, Validators.maxLength(12)]),
+        label: new FormControl('', [Validators.required, Validators.maxLength(8)])
       })
     );
   }
 
   public validate(): ValidationErrors | null {
-    if (this.form.valid) {
-      // tslint:disable-next-line:no-null-keyword
-      return null;
-    } else {
-      return {
-        invalidForm: { valid: false, message: 'Redirect uris fields are invalid' }
-      };
-    }
+    return this.form.valid ? null : {invalidForm: { valid: false }};
   }
 }

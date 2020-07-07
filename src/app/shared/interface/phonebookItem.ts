@@ -8,6 +8,6 @@ export interface PhonebookItem {
 }
 
 export interface PhoneNumbers {
-  type: string;
+  label: string;
   number: string;
 }

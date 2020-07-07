@@ -7,20 +7,22 @@
   <ng-container *ngFor="let contact of form.controls; index as idx">
     <ng-container [formGroup]="contact">
       <input
-        [ngClass]="contact['controls'].cell.touched && contact['controls'].cell.hasError('required') ? 'field-error' : undefined"
-        formControlName="cell"
+        [class.field-error]="contact['controls'].label.touched && contact['controls'].label.hasError('required')"
+        formControlName="label"
         class="number-type"
         type="text"
+        maxlength="10"
         placeholder="Label">
       <input
-        [ngClass]="contact['controls'].number.touched && contact['controls'].number.hasError('required') ? 'field-error' : undefined"
+        [class.field-error]="contact['controls'].number.touched && contact['controls'].number.hasError('required')"
+        [ngClass]="form.controls.length === 1 ? 'extend' : 'shortened'"
         formControlName="number"
-        class="number"
         type="text"
+        maxlength="15"
         placeholder="Number">
     </ng-container>
-      <div class="delete-button" *ngIf="form.controls.length !== 1; else disable" (click)="removeContact(idx)"><img src="../assets/svg-icons/x.svg"></div>
-      <ng-template #disable><div class="delete-button"></div></ng-template>
+      <div class="delete-button" *ngIf="form.controls.length !== 1" (click)="removeContact(idx)"><img src="../assets/svg-icons/x.svg"></div>
+
   </ng-container>
   <div class="add-button-container" *ngIf="form.controls.length < 5"  (click)="addNewContact()">
     <div class="add-button"><img src="../assets/svg-icons/x.svg"></div>
