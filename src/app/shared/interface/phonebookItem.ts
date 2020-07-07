@@ -7,7 +7,7 @@ export interface PhonebookItem {
   img: string;
 }
 
-interface PhoneNumbers {
+export interface PhoneNumbers {
   type: string;
   number: string;
 }

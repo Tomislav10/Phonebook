@@ -22,24 +22,38 @@
 
     .actions-section {
       display: grid;
-      grid-template-columns: 544px 42px 13px;
-      grid-column-gap: 15px;
+      grid-template-columns: 559px auto;
 
-      img:nth-child(1) {
+
+      img {
+        padding-left: 8px;
         &:hover {
           cursor: pointer;
+          filter: invert(52%) sepia(44%) saturate(699%) hue-rotate(137deg) brightness(95%) contrast(81%);
         }
-
-        outline: 0;
-        padding-left: 8px;
+        &:focus {
+          outline: 0;
+        }
+      }
+      div {
+        display: flex;
+        &:hover {
+          cursor: pointer;
+          filter: invert(52%) sepia(44%) saturate(699%) hue-rotate(137deg) brightness(95%) contrast(81%);
+        }
+        span {
+          color: #BBC4C3;
+          font-family: Lato;
+          font-size: 14px;
+          width: 30px;
+        }
+        img {
+          padding-left: 0;
+          margin: -23px 0 0 26px;
+        }
       }
 
-      span {
-        padding-right: 15px;
-        color: #BBC4C3;
-        font-family: Lato;
-        font-size: 14px;
-      }
+
 
     }
 
@@ -62,6 +76,7 @@
       .button-container {
         display: grid;
         grid-template-columns: repeat(2, 50%);
+        margin-bottom: 80px;
 
         button {
           &:hover {

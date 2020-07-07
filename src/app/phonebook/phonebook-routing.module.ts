@@ -31,10 +31,12 @@ const routes: Routes = [
     },
     {
       path: 'edit/:id',
+      data: {edit: true},
       component: CreateNewItemComponent
     },
     {
       path: 'create',
+      data: {create: false},
       component: CreateNewItemComponent
     }
   ]
