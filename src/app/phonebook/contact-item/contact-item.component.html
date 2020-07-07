@@ -1,14 +1,14 @@
-<div class="item-container" [routerLink]="['../view', item.id]">
+<div class="item-container" [routerLink]="['../view', contact.id]">
   <div class="favorites">
-    <i (click)="setItemFavorite()" [ngClass]="item.favorite ? 'fas fa-heart' : 'far fa-heart'"></i>
+    <i (click)="setItemFavorite()" [ngClass]="contact.favorite ? 'fas fa-heart' : 'far fa-heart'"></i>
   </div>
-  <div class="profile-photo"><img [src]="item.img" onerror="src='https://www.nik.hr/storage/app/uploads/storage/images/20522/thumbs/20522.jpg'"/></div>
+  <div class="profile-photo"><img [src]="contact.img || 'https://www.nik.hr/storage/app/uploads/storage/images/20522/thumbs/20522.jpg'"/></div>
   <div class="actions">
-    <img src="../assets/svg-icons/edit.svg" [routerLink]="['../edit', item.id]">
-    <img src="../assets/svg-icons/trash.svg" (click)="$event.stopPropagation(); openDialog('delete-confirmation' + item.id)">
+    <img src="../assets/svg-icons/edit.svg" [routerLink]="['../edit', contact.id]">
+    <img src="../assets/svg-icons/trash.svg" (click)="$event.stopPropagation(); openDialog('delete-confirmation' + contact.id)">
   </div>
-  <div class="name">{{ item.name }}</div>
+  <div class="name">{{ contact.name }}</div>
 </div>
 
-<app-confirmation-dialog [id]="'delete-confirmation' + item.id" (confirmDelete)="confirmDelete($event)">
+<app-confirmation-dialog [id]="'delete-confirmation' + contact.id" (confirmDelete)="confirmDelete($event)">
 </app-confirmation-dialog>

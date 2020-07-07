@@ -6,24 +6,38 @@
   </div>
   <ng-container *ngFor="let contact of form.controls; index as idx">
     <form [formGroup]="contact" class="input-container">
-      <div class="delete-button" *ngIf="form.controls.length !== 1" (click)="removeContact(idx)"><img src="../assets/svg-icons/x.svg"></div>
-      <input
-        [class.field-error]="contact['controls'].number.touched && contact['controls'].number.hasError('required')"
-        formControlName="number"
-        class="number-type"
-        type="text"
-        maxlength="15"
-        placeholder="Number">
-      <input
-        [class.field-error]="contact['controls'].label.touched && contact['controls'].label.hasError('required')"
-        [ngClass]="form.controls.length === 1 ? 'extend' : 'shortened'"
-        formControlName="label"
-        type="text"
-        maxlength="10"
-        placeholder="Label">
+      <div class="delete-button" *ngIf="form.controls.length !== 1" (click)="removeContact(idx)"><img
+        src="../assets/svg-icons/x.svg"></div>
+      <label for="number" class="error-label">
+        <span *ngIf="contact['controls'].number.touched">
+          {{ contact['controls'].number.hasError('required') ? 'Number is required' :
+          (contact['controls'].number.hasError('notValidPhoneNumber') ? 'Number is not valid' : '') }}
+        </span>
+        <input
+          id="number"
+          [class.field-error]="contact['controls'].number.touched && contact['controls'].number.hasError('required')"
+          formControlName="number"
+          class="number-type"
+          type="text"
+          maxlength="15"
+          placeholder="Number">
+      </label>
+      <label for="label" class="error-label">
+        <span *ngIf="contact['controls'].label.touched">
+          {{ contact['controls'].label.hasError('required') ? 'Label is required' : '' }}
+        </span>
+        <input
+          id="label"
+          [class.field-error]="contact['controls'].label.touched && contact['controls'].label.hasError('required')"
+          [ngClass]="form.controls.length === 1 ? 'extend' : 'shortened'"
+          formControlName="label"
+          type="text"
+          maxlength="10"
+          placeholder="Label">
+      </label>
     </form>
   </ng-container>
-  <div class="add-button-container" *ngIf="form.controls.length < 5"  (click)="addNewContact()">
+  <div class="add-button-container" *ngIf="form.controls.length < 5" (click)="addNewContact()">
     <div class="add-button"><img src="../assets/svg-icons/x.svg"></div>
     <span>Add number</span>
   </div>

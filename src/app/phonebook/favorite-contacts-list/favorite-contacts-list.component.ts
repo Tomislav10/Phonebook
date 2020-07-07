@@ -3,8 +3,9 @@ import {select, Store} from '@ngrx/store';
 import {NgForm} from '@angular/forms';
 import {combineLatest, Observable, of} from 'rxjs';
 import {map} from 'rxjs/operators';
-import {getFavoritePhonebookItems, PhonebookState} from '../store';
+import {PhonebookState} from '../store';
 import {Contact} from '../../shared/interface/contact';
+import {getFavoriteContacts} from '../store/selector';
 
 @Component({
   selector: 'app-favorite-contacts-list',
@@ -14,15 +15,15 @@ import {Contact} from '../../shared/interface/contact';
 export class FavoriteContactsListComponent implements OnInit {
   @ViewChild('form') ngForm: NgForm;
 
-  public readonly favoritePhonebookItems$ = this.store.pipe(select(getFavoritePhonebookItems));
-  public filteredPhonebookItems$: Observable<Contact[]> = of([]);
+  public readonly favoriteContacts$ = this.store.pipe(select(getFavoriteContacts));
+  public filteredContacts$: Observable<Contact[]> = of([]);
 
   public searchField: string;
 
   constructor(private store: Store<PhonebookState>) {}
 
   ngOnInit() {
-    this.filteredPhonebookItems$ = combineLatest([this.favoritePhonebookItems$, this.ngForm.form.valueChanges])
+    this.filteredContacts$ = combineLatest([this.favoriteContacts$, this.ngForm.form.valueChanges])
       .pipe(
         map(
           ([items, search]) => items.filter(data =>

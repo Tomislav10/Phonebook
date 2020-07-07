@@ -1,6 +1,5 @@
 <div class="item-container" *ngIf="contact$ | async; let contact">
   <img class="upload-image" [src]="contact.img || 'https://www.nik.hr/storage/app/uploads/storage/images/20522/thumbs/20522.jpg'">
-
   <div class="form-container">
     <div class="actions-section">
       <img src="../assets/svg-icons/back-button.svg" [routerLink]="'../../'">

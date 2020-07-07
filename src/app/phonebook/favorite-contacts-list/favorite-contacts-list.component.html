@@ -4,9 +4,9 @@
 </form>
 
 <div class="phonebook-items">
-  <div *ngFor="let item of filteredPhonebookItems$ | async">
+  <div *ngFor="let contact of filteredContacts$ | async">
     <app-contact-item
-      [item]="item">
+      [contact]="contact">
     </app-contact-item>
   </div>
 </div>

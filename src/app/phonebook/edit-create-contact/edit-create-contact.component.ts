@@ -2,10 +2,12 @@ import {Component, OnInit} from '@angular/core';
 import {select, Store} from '@ngrx/store';
 import {ActivatedRoute, Data, Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {getCurrentItem, PhonebookState} from '../store';
-import {AddItem, DeleteItem} from '../store/actions';
+import {PhonebookState} from '../store';
+import {CreateItem, DeleteItem, GetItemsListRequest} from '../store/actions';
 import {Contact} from '../../shared/interface/contact';
 import {DialogService} from '../../shared/confiramtion-dialog/dialog.service';
+import {getAllContacts, getCurrentContact} from '../store/selector';
+import {combineLatest} from 'rxjs';
 
 @Component({
   selector: 'app-edit-create-contact',
@@ -14,12 +16,14 @@ import {DialogService} from '../../shared/confiramtion-dialog/dialog.service';
 })
 export class EditCreateContactComponent implements OnInit {
 
-  public contactItemForm: FormGroup;
+  public contactForm: FormGroup;
   public image;
 
-  public currentContact$ = this.store.pipe(select(getCurrentItem));
+  private readonly currentContact$ = this.store.pipe(select(getCurrentContact));
+  private readonly allContacts$ = this.store.pipe(select(getAllContacts));
   public mode: { edit?: boolean, create?: boolean };
-  private currentConntact?: Contact;
+  private currentContact?: Contact;
+  private redirectId?: string;
 
   constructor(
     private store: Store<PhonebookState>,
@@ -28,26 +32,35 @@ export class EditCreateContactComponent implements OnInit {
     private router: Router
   ) {
     activeRoute.data.subscribe((data: Data) => this.mode = data);
+    this.store.dispatch(new GetItemsListRequest);
     this.setForm();
   }
 
   ngOnInit(): void {
-    if (this.mode.edit) {
-      this.currentContact$.subscribe(data => {
-        this.contactItemForm.setValue({name: data.name, email: data.email, contacts: data.contacts});
-        this.currentConntact = data;
-        this.image = data.img;
+      combineLatest([this.currentContact$, this.allContacts$]).subscribe(([contact, allContacts]) => {
+        if (this.mode.edit && contact) {
+          this.contactForm.setValue({name: contact.name, email: contact.email, contacts: contact.contacts});
+          this.currentContact = contact;
+          this.image = contact.img;
+          this.redirectId = contact.id;
+        } else {
+          this.redirectId = allContacts && allContacts.length + 1;
+          console.log(allContacts);
+          console.log(this.redirectId);
+        }
       });
-    }
   }
 
   public submitForm() {
-    this.store.dispatch(new AddItem({data: {...this.currentConntact, ...this.contactItemForm.value, img: this.image }}));
-    this.router.navigate([this.mode.create ? '../' : '../../']);
+    this.store.dispatch(
+      new CreateItem(
+        {data: {...this.currentContact, ...this.contactForm.value, img: this.image }, redirectId: this.redirectId}
+        )
+    );
   }
 
   private setForm(): void {
-    this.contactItemForm = new FormGroup({
+    this.contactForm = new FormGroup({
       name: new FormControl('', [Validators.required]),
       email: new FormControl('', []),
       contacts: new FormControl('', [])
@@ -68,7 +81,7 @@ export class EditCreateContactComponent implements OnInit {
   }
 
   public confirmDelete(event: boolean) {
-    this.store.dispatch(new DeleteItem({id: this.currentConntact.id}));
+    this.store.dispatch(new DeleteItem({id: this.currentContact.id}));
     this.router.navigate(['../../']);
   }
 }

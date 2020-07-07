@@ -3,19 +3,19 @@ import {PhonebookState} from './reducer';
 
 export const selectPhonebookState = createFeatureSelector<PhonebookState>('phonebookState');
 
-export const getAllPhonebookItems = createSelector(
+export const getAllContacts = createSelector(
   selectPhonebookState,
   state => state && state.contactsList
 );
 
-export const getFavoritePhonebookItems = createSelector(
-  selectPhonebookState,
-  state => state.contactsList.filter(
+export const getFavoriteContacts = createSelector(
+  getAllContacts,
+  state => (state || []).filter(
     item => item.favorite
   )
 );
 
-export const getCurrentItem = createSelector(
+export const getCurrentContact = createSelector(
   selectPhonebookState,
   state => state && state.currentContact
 );

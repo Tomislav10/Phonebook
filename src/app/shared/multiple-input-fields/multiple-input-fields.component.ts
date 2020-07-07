@@ -4,9 +4,11 @@ import {
   ControlContainer,
   ControlValueAccessor,
   FormArray,
-  FormControl, FormGroup,
+  FormControl,
+  FormGroup,
   NG_VALIDATORS,
-  NG_VALUE_ACCESSOR, ValidationErrors,
+  NG_VALUE_ACCESSOR,
+  ValidationErrors,
   Validator,
   Validators
 } from '@angular/forms';
@@ -30,10 +32,9 @@ import {PhoneNumbers} from '../interface/contact';
   ]
 })
 export class MultipleInputFieldsComponent implements ControlValueAccessor, Validator {
+  public readonly form: FormArray = new FormArray([], [Validators.required]);
   @Output()
   private readonly blur = new EventEmitter();
-
-  public readonly form: FormArray = new FormArray([], [Validators.required]);
 
   constructor(private readonly controlContainer: ControlContainer) {
   }
@@ -44,7 +45,7 @@ export class MultipleInputFieldsComponent implements ControlValueAccessor, Valid
       value.map(contact => {
         return arr.push(
           new FormGroup({
-            number: new FormControl(contact.number, [Validators.required]),
+            number: new FormControl(contact.number, [Validators.required, isValidPhoneNumber]),
             label: new FormControl(contact.label, [Validators.required])
           })
         );
@@ -52,7 +53,7 @@ export class MultipleInputFieldsComponent implements ControlValueAccessor, Valid
     } else {
       arr.push(
         new FormGroup({
-          number: new FormControl('', [Validators.required]),
+          number: new FormControl('', [Validators.required, isValidPhoneNumber]),
           label: new FormControl('', [Validators.required])
         })
       );
@@ -89,6 +90,16 @@ export class MultipleInputFieldsComponent implements ControlValueAccessor, Valid
   }
 
   public validate(): ValidationErrors | null {
-    return this.form.valid ? null : {invalidForm: { valid: false }};
+    return this.form.valid ? null : {invalidForm: {valid: false}};
   }
+}
+
+
+function isValidPhoneNumber(control: AbstractControl): ValidationErrors | null {
+  console.log(/^[+]*[(]{0,1}[0-9]{1,3}[)]{0,1}[-\s\./0-9]*$/g.test(control.value) && control.value.length > 7);
+  if (/^[+]*[(]{0,1}[0-9]{1,3}[)]{0,1}[-\s\./0-9]*$/g.test(control.value) && control.value.length > 7) {
+    // eslint-disable-next-line no-null/no-null
+    return null;
+  }
+  return {notValidPhoneNumber: true};
 }

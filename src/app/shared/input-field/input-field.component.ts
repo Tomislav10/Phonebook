@@ -1,5 +1,6 @@
 import {Component, EventEmitter, forwardRef, Input, Output} from '@angular/core';
 import {
+  AbstractControl,
   ControlContainer,
   ControlValueAccessor,
   FormControl, NG_VALIDATORS, NG_VALUE_ACCESSOR,
@@ -38,6 +39,13 @@ export class InputFieldComponent implements ControlValueAccessor, Validator {
     }
   }
 
+  @Input()
+  public set email(value: boolean) {
+    if (value) {
+      this.field.setValidators([isValidEmail]);
+    }
+  }
+
   @Input() public imgSrc: string;
 
   public readonly field: FormControl = new FormControl('', []);
@@ -70,4 +78,13 @@ export class InputFieldComponent implements ControlValueAccessor, Validator {
       };
     }
   }
+}
+
+function isValidEmail(control: AbstractControl): ValidationErrors | null {
+  console.log(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(control.value));
+  if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(control.value)) {
+    // eslint-disable-next-line no-null/no-null
+    return null;
+  }
+  return {notValidEmail: true};
 }

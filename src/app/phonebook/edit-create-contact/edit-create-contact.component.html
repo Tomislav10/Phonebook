@@ -10,22 +10,22 @@
   <div class="form-container">
     <div class="actions-section">
       <img src="../assets/svg-icons/back-button.svg" [routerLink]="mode.create ? '../' : '../../'">
-      <div *ngIf="mode.edit" (click)="openDialog('delete-confirmation' + currentConntact.id)">
+      <div *ngIf="mode.edit" (click)="openDialog('delete-confirmation' + currentContact.id)">
         <span>Delete</span>
         <img src="../assets/svg-icons/trash.svg">
       </div>
     </div>
-    <form [formGroup]="contactItemForm">
+    <form [formGroup]="contactForm">
       <div class="divider"></div>
 
       <div class="input-field">
-        <app-input-field formControlName="name" [required]="true" label="full name" [imgSrc]="'../../../assets/svg-icons/user.svg'"></app-input-field>
+        <app-input-field formControlName="name" [required]="true" label="Full name" [imgSrc]="'../../../assets/svg-icons/user.svg'"></app-input-field>
       </div>
 
       <div class="divider"></div>
 
       <div class="input-field">
-        <app-input-field formControlName="email" [required]="false" label="email" [imgSrc]="'../../../assets/svg-icons/mail.svg'"></app-input-field>
+        <app-input-field formControlName="email" [required]="false" [email]="true" label="Email" [imgSrc]="'../../../assets/svg-icons/mail.svg'"></app-input-field>
       </div>
 
       <div class="divider"></div>
@@ -36,10 +36,12 @@
 
       <div class="button-container">
         <button
+          type="button"
           [routerLink]="mode.create ? '../' : '../../'"
         >Cancel</button>
         <button
-          [disabled]="!contactItemForm.valid"
+          type="button"
+          [disabled]="!contactForm.valid"
           (click)="submitForm()"
         >Save</button>
       </div>
@@ -47,5 +49,5 @@
   </div>
 </div>
 
-<app-confirmation-dialog *ngIf="mode.edit" [id]="'delete-confirmation' + currentConntact.id" (confirmDelete)="confirmDelete($event)">
+<app-confirmation-dialog *ngIf="mode.edit" [id]="'delete-confirmation' + (currentContact ? currentContact.id : '')" (confirmDelete)="confirmDelete($event)">
 </app-confirmation-dialog>

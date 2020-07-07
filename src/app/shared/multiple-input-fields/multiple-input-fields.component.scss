@@ -51,16 +51,28 @@
       padding-left: 30px;
     }
 
-    .field-error {
-      border: 1px solid #c40a00;
+    .error-label {
+      position: relative;
+
+      span {
+        font-family: Lato;
+        font-size: 11px;
+        position: absolute;
+        color: red;
+        top: 63px;
+      }
     }
 
-    input:not(:last-child) {
+    .field-error {
+      border: 1px solid #c40a00 !important;
+    }
+
+    label:not(:last-child) {
       margin-bottom: 30px;
     }
 
-    .delete-button:hover ~ input {
-      border: 1px solid #2DA1AD;
+    .delete-button:hover ~ label > input {
+      border: 1px solid #2DA1AD !important;
     }
 
     .delete-button {

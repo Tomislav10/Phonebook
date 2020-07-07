@@ -3,9 +3,16 @@
     <img [src]=imgSrc>
     <span>{{ label }}</span>
   </div>
-  <input
-    [ngClass]="field.touched && field.hasError('required') ? 'field-error' : undefined"
-    [formControl]="field"
-    type="text"
-    [placeholder]="label.charAt(0).toUpperCase() + label.slice(1)">
+  <label for="customInput" class="error-label">
+    <span *ngIf="field.touched && field.hasError('required');else email">{{label}} is required</span>
+    <ng-template #email>
+      <span *ngIf="field.touched && field.hasError('notValidEmail')">Email is not valid</span>
+    </ng-template>
+    <input
+      id="customInput"
+      [ngClass]="field.touched && !field.valid ? 'field-error' : undefined"
+      [formControl]="field"
+      type="text"
+      [placeholder]="label">
+  </label>
 </div>

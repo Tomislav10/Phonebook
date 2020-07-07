@@ -13,7 +13,19 @@
   }
 
   .field-error {
-    border: 1px solid #c40a00;
+    border: 1px solid #c40a00 !important;
+  }
+
+  .error-label {
+    position: relative;
+
+    span {
+      font-family: Lato;
+      font-size: 11px;
+      position: absolute;
+      color: red;
+      top: 63px;
+    }
   }
 
   input {

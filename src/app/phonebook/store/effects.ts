@@ -1,10 +1,18 @@
 import {Injectable} from '@angular/core';
-import {Actions, createEffect, ofType} from '@ngrx/effects';
-import {map, mergeMap, switchMap} from 'rxjs/operators';
+import {Actions, createEffect, Effect, ofType} from '@ngrx/effects';
+import {map, mergeMap, switchMap, tap} from 'rxjs/operators';
 import {HttpClient} from '@angular/common/http';
 import {PhonebookActions} from './action-types';
-import {ADD_ITEM, DELETE_ITEM, GET_ITEM_REQUEST, GET_ITEMS_LIST_REQUEST, GetItemsListSuccess, UPDATE_ITEM} from './actions';
+import {
+  CREATE_CONTACT,
+  DELETE_CONTACT,
+  GET_CONTACT_REQUEST,
+  GET_CONTACTS_LIST_REQUEST,
+  GetItemsListSuccess, REDIRECT_TO_VIEW,
+  UPDATE_CONTACT
+} from './actions';
 import {Contact} from '../../shared/interface/contact';
+import {Router} from '@angular/router';
 
 @Injectable()
 export class Effects {
@@ -12,11 +20,18 @@ export class Effects {
   // API endpoint
   private readonly apiEndpoint = 'api/phonebookItems';
 
-  constructor(private action$: Actions, private http: HttpClient) {}
+  constructor(private action$: Actions, private http: HttpClient, private router: Router) {}
 
-  private getItemsList = createEffect(
+  private redirectToView = createEffect(
     () => this.action$.pipe(
-      ofType<PhonebookActions.GetItemsListRequest>(GET_ITEMS_LIST_REQUEST),
+        ofType<PhonebookActions.RedirectToView>(REDIRECT_TO_VIEW),
+        tap(action => this.router.navigate([action.payload.redirectPath]))
+      ), { dispatch: false }
+    );
+
+  private getContactList = createEffect(
+    () => this.action$.pipe(
+      ofType<PhonebookActions.GetItemsListRequest>(GET_CONTACTS_LIST_REQUEST),
       switchMap(() =>
         this.http.get<Contact[]>(this.apiEndpoint)
           .pipe(
@@ -26,9 +41,9 @@ export class Effects {
     )
   );
 
-  private getItem = createEffect(
+  private getContact = createEffect(
     () => this.action$.pipe(
-      ofType<PhonebookActions.GetItemRequest>(GET_ITEM_REQUEST),
+      ofType<PhonebookActions.GetItemRequest>(GET_CONTACT_REQUEST),
       switchMap((action) => {
         return this.http.get(`${this.apiEndpoint}/${action.payload.id}`)
           .pipe(
@@ -38,21 +53,25 @@ export class Effects {
     )
   );
 
-  private addItem = createEffect(
+  private createContact = createEffect(
     () => this.action$.pipe(
-      ofType<PhonebookActions.AddItem>(ADD_ITEM),
+      ofType<PhonebookActions.CreateItem>(CREATE_CONTACT),
       switchMap((action) => {
         return this.http.post(this.apiEndpoint, action.payload.data)
           .pipe(
-            map((data: Contact[]) => new PhonebookActions.GetItemsListRequest)
+            map(() =>
+              new PhonebookActions.RedirectToView(
+                {redirectPath: `../../view/${action.payload.redirectId}`}
+                )
+            )
           );
       })
     )
   );
 
-  private deleteItem = createEffect(
+  private deleteContact = createEffect(
     () => this.action$.pipe(
-      ofType<PhonebookActions.DeleteItem>(DELETE_ITEM),
+      ofType<PhonebookActions.DeleteItem>(DELETE_CONTACT),
       switchMap((action) => {
         return this.http.delete(`${this.apiEndpoint}/${action.payload.id}`)
           .pipe(
@@ -62,13 +81,13 @@ export class Effects {
     )
   );
 
-  private updateItem = createEffect(
+  private updateContact = createEffect(
     () => this.action$.pipe(
-      ofType<PhonebookActions.UpdateItem>(UPDATE_ITEM),
+      ofType<PhonebookActions.UpdateItem>(UPDATE_CONTACT),
       switchMap((action) => {
         return this.http.put(`${this.apiEndpoint}/${action.payload.id}`, action.payload.data)
           .pipe(
-            mergeMap((data: Contact[]) => [
+            mergeMap(() => [
               new PhonebookActions.GetItemRequest({id: (action.payload.id).toString()}),
               new PhonebookActions.GetItemsListRequest
             ])
