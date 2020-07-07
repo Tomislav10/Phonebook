@@ -38,7 +38,7 @@ export class GetItemSuccess implements Action {
 export class CreateItem implements Action {
   public readonly type = CREATE_CONTACT;
 
-  constructor(public payload: { data: Contact; redirectId: string }) {}
+  constructor(public payload: { data: Contact }) {}
 }
 
 export class DeleteItem implements Action {

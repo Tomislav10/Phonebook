@@ -3,11 +3,11 @@ import {select, Store} from '@ngrx/store';
 import {ActivatedRoute, Data, Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {PhonebookState} from '../store';
-import {CreateItem, DeleteItem, GetItemsListRequest} from '../store/actions';
+import {CreateItem, DeleteItem} from '../store/actions';
 import {Contact} from '../../shared/interface/contact';
 import {DialogService} from '../../shared/confiramtion-dialog/dialog.service';
 import {getAllContacts, getCurrentContact} from '../store/selector';
-import {combineLatest} from 'rxjs';
+import {SharedService} from '../../shared/shared.service';
 
 @Component({
   selector: 'app-edit-create-contact',
@@ -23,40 +23,43 @@ export class EditCreateContactComponent implements OnInit {
   private readonly allContacts$ = this.store.pipe(select(getAllContacts));
   public mode: { edit?: boolean, create?: boolean };
   private currentContact?: Contact;
-  private redirectId?: string;
+  private redirectId?: number;
 
   constructor(
     private store: Store<PhonebookState>,
     private activeRoute: ActivatedRoute,
     private dialogService: DialogService,
+    private sharedService: SharedService,
     private router: Router
   ) {
     activeRoute.data.subscribe((data: Data) => this.mode = data);
-    this.store.dispatch(new GetItemsListRequest);
     this.setForm();
   }
 
   ngOnInit(): void {
-      combineLatest([this.currentContact$, this.allContacts$]).subscribe(([contact, allContacts]) => {
-        if (this.mode.edit && contact) {
-          this.contactForm.setValue({name: contact.name, email: contact.email, contacts: contact.contacts});
-          this.currentContact = contact;
-          this.image = contact.img;
-          this.redirectId = contact.id;
-        } else {
-          this.redirectId = allContacts && allContacts.length + 1;
-          console.log(allContacts);
-          console.log(this.redirectId);
-        }
+    if (this.mode.edit) {
+      this.currentContact$.subscribe((contact) => {
+        console.log('../../')
+        this.contactForm.setValue({name: contact.name, email: contact.email, contacts: contact.contacts});
+        this.currentContact = contact;
+        this.image = contact.img;
+        this.redirectId = contact.id;
       });
+    } else {
+      this.redirectId = Math.floor(Date.now() / 1000);
+    }
   }
 
   public submitForm() {
-    this.store.dispatch(
-      new CreateItem(
-        {data: {...this.currentContact, ...this.contactForm.value, img: this.image }, redirectId: this.redirectId}
+    this.sharedService.touch.next(true);
+    const id = this.redirectId ? this.redirectId : this.currentContact.id;
+    if (this.contactForm.valid) {
+      this.store.dispatch(
+        new CreateItem(
+          {data: {...this.currentContact, ...this.contactForm.value, img: this.image, id }}
         )
-    );
+      );
+    }
   }
 
   private setForm(): void {

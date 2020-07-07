@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Actions, createEffect, Effect, ofType} from '@ngrx/effects';
-import {map, mergeMap, switchMap, tap} from 'rxjs/operators';
-import {HttpClient} from '@angular/common/http';
+import {catchError, map, mergeMap, switchMap, tap} from 'rxjs/operators';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {PhonebookActions} from './action-types';
 import {
   CREATE_CONTACT,
@@ -13,6 +13,7 @@ import {
 } from './actions';
 import {Contact} from '../../shared/interface/contact';
 import {Router} from '@angular/router';
+import {of} from 'rxjs';
 
 @Injectable()
 export class Effects {
@@ -44,14 +45,16 @@ export class Effects {
   private getContact = createEffect(
     () => this.action$.pipe(
       ofType<PhonebookActions.GetItemRequest>(GET_CONTACT_REQUEST),
-      switchMap((action) => {
-        return this.http.get(`${this.apiEndpoint}/${action.payload.id}`)
+      switchMap((action) =>
+        this.http.get(`${this.apiEndpoint}/${action.payload.id}`)
           .pipe(
-            map((data: Contact) => new PhonebookActions.GetItemSuccess(data))
-          );
-      })
-    )
-  );
+            map((data: Contact) => new PhonebookActions.GetItemSuccess(data)),
+            catchError((error: HttpErrorResponse) =>
+              of(new PhonebookActions.RedirectToView({redirectPath: '../../'}))
+            )
+          )
+      )
+    ));
 
   private createContact = createEffect(
     () => this.action$.pipe(
@@ -61,7 +64,7 @@ export class Effects {
           .pipe(
             map(() =>
               new PhonebookActions.RedirectToView(
-                {redirectPath: `../../view/${action.payload.redirectId}`}
+                {redirectPath: `../../view/${action.payload.data.id}`}
                 )
             )
           );

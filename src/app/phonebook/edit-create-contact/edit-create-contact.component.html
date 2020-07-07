@@ -9,7 +9,7 @@
 
   <div class="form-container">
     <div class="actions-section">
-      <img src="../assets/svg-icons/back-button.svg" [routerLink]="mode.create ? '../' : '../../'">
+      <img src="../assets/svg-icons/back-button.svg" [routerLink]="'../../'">
       <div *ngIf="mode.edit" (click)="openDialog('delete-confirmation' + currentContact.id)">
         <span>Delete</span>
         <img src="../assets/svg-icons/trash.svg">
@@ -19,13 +19,24 @@
       <div class="divider"></div>
 
       <div class="input-field">
-        <app-input-field formControlName="name" [required]="true" label="Full name" [imgSrc]="'../../../assets/svg-icons/user.svg'"></app-input-field>
+        <app-input-field
+          formControlName="name"
+          [required]="true"
+          label="Full name"
+          [imgSrc]="'../../../assets/svg-icons/user.svg'">
+        </app-input-field>
       </div>
 
       <div class="divider"></div>
 
       <div class="input-field">
-        <app-input-field formControlName="email" [required]="false" [email]="true" label="Email" [imgSrc]="'../../../assets/svg-icons/mail.svg'"></app-input-field>
+        <app-input-field
+          formControlName="email"
+          [required]="false"
+          [email]="true"
+          label="Email"
+          [imgSrc]="'../../../assets/svg-icons/mail.svg'">
+        </app-input-field>
       </div>
 
       <div class="divider"></div>
@@ -41,7 +52,6 @@
         >Cancel</button>
         <button
           type="button"
-          [disabled]="!contactForm.valid"
           (click)="submitForm()"
         >Save</button>
       </div>

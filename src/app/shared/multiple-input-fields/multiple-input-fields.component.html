@@ -15,7 +15,7 @@
         </span>
         <input
           id="number"
-          [class.field-error]="contact['controls'].number.touched && contact['controls'].number.hasError('required')"
+          [class.field-error]="contact['controls'].number.touched && !contact['controls'].number.valid"
           formControlName="number"
           class="number-type"
           type="text"
@@ -28,7 +28,7 @@
         </span>
         <input
           id="label"
-          [class.field-error]="contact['controls'].label.touched && contact['controls'].label.hasError('required')"
+          [class.field-error]="contact['controls'].label.touched && !contact['controls'].label.valid"
           [ngClass]="form.controls.length === 1 ? 'extend' : 'shortened'"
           formControlName="label"
           type="text"

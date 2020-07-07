@@ -1,4 +1,4 @@
-import {Component, EventEmitter, forwardRef, Output} from '@angular/core';
+import {Component, EventEmitter, forwardRef, Input, Output} from '@angular/core';
 import {
   AbstractControl,
   ControlContainer,
@@ -13,6 +13,7 @@ import {
   Validators
 } from '@angular/forms';
 import {PhoneNumbers} from '../interface/contact';
+import {SharedService} from '../shared.service';
 
 @Component({
   selector: 'app-multiple-input-fields',
@@ -36,7 +37,13 @@ export class MultipleInputFieldsComponent implements ControlValueAccessor, Valid
   @Output()
   private readonly blur = new EventEmitter();
 
-  constructor(private readonly controlContainer: ControlContainer) {
+  constructor(sharedService: SharedService) {
+    sharedService.touch.subscribe(() => {
+      this.form.controls.forEach((data: FormGroup) => {
+        data.controls.number.markAsTouched();
+        data.controls.label.markAsTouched();
+      });
+    });
   }
 
   public writeValue(value: PhoneNumbers[] | undefined) {
@@ -83,8 +90,8 @@ export class MultipleInputFieldsComponent implements ControlValueAccessor, Valid
   public addNewContact() {
     this.form.push(
       new FormGroup({
-        number: new FormControl('', [Validators.required, Validators.maxLength(12)]),
-        label: new FormControl('', [Validators.required, Validators.maxLength(8)])
+        number: new FormControl('', [Validators.required, isValidPhoneNumber]),
+        label: new FormControl('', [Validators.required])
       })
     );
   }
@@ -96,7 +103,6 @@ export class MultipleInputFieldsComponent implements ControlValueAccessor, Valid
 
 
 function isValidPhoneNumber(control: AbstractControl): ValidationErrors | null {
-  console.log(/^[+]*[(]{0,1}[0-9]{1,3}[)]{0,1}[-\s\./0-9]*$/g.test(control.value) && control.value.length > 7);
   if (/^[+]*[(]{0,1}[0-9]{1,3}[)]{0,1}[-\s\./0-9]*$/g.test(control.value) && control.value.length > 7) {
     // eslint-disable-next-line no-null/no-null
     return null;

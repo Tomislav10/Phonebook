@@ -1,13 +1,13 @@
 import {Component, EventEmitter, forwardRef, Input, Output} from '@angular/core';
 import {
   AbstractControl,
-  ControlContainer,
   ControlValueAccessor,
   FormControl, NG_VALIDATORS, NG_VALUE_ACCESSOR,
   ValidationErrors,
   Validator,
   Validators
 } from '@angular/forms';
+import {SharedService} from '../shared.service';
 
 @Component({
   selector: 'app-input-field',
@@ -50,14 +50,14 @@ export class InputFieldComponent implements ControlValueAccessor, Validator {
 
   public readonly field: FormControl = new FormControl('', []);
 
-  constructor(private readonly controlContainer: ControlContainer) {
+  constructor(sharedService: SharedService) {
+    sharedService.touch.subscribe(() => {
+      this.field.markAsTouched();
+    });
   }
 
   public writeValue(value: string | undefined) {
     this.field.setValue(value || '');
-    if (this.controlContainer.control) {
-      this.controlContainer.control.markAsPristine();
-    }
   }
 
   public registerOnChange(fn: (v: string) => void) {
@@ -81,8 +81,7 @@ export class InputFieldComponent implements ControlValueAccessor, Validator {
 }
 
 function isValidEmail(control: AbstractControl): ValidationErrors | null {
-  console.log(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(control.value));
-  if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(control.value)) {
+  if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(control.value) || !control.value.length) {
     // eslint-disable-next-line no-null/no-null
     return null;
   }

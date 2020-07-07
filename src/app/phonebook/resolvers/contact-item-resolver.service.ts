@@ -14,7 +14,11 @@ export class ContactItemResolverService implements Resolve<{}> {
   public resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     this.router.events.pipe(filter(e => e instanceof NavigationEnd), take(1)).subscribe((data: NavigationEnd) => {
         const contactId = data.url.substr(data.url.lastIndexOf('/') + 1);
-        this.store.dispatch(new GetItemRequest({id: contactId}));
+        if (!(/^\d+$/).test(contactId)) {
+          this.router.navigate(['../../']);
+        } {
+          this.store.dispatch(new GetItemRequest({id: contactId}));
+        }
       }
     );
 
