@@ -1,8 +1,10 @@
 <div class="item-container">
-  <img class="upload-image" [src]="(currentContact$ | async).img" *ngIf="mode.edit; else createMode">
-  <ng-template #createMode>
-    <img class="upload-image">
-  </ng-template>
+  <label for="file-upload" class="upload-image"
+         [style.background-color]="image ? 'rgba(0, 0, 0, 0.4)' : 'rgba(45,161,173,0.4)'">
+    <img [src]="image" *ngIf="image" class="image">
+    <img src="../assets/svg-icons/upload.svg" class="upload-icon">
+    <input id="file-upload" hidden type="file" (change)="updateProfilePhoto($event)"/>
+  </label>
 
 
   <div class="form-container">

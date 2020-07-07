@@ -5,13 +5,27 @@
   grid-template-columns: 217px 630px;
 
   .upload-image {
+    &:hover {
+      cursor: pointer;
+    }
     margin-top: 57px;
-    box-sizing: border-box;
     border-radius: 50%;
+    box-sizing: border-box;
     height: 186px;
     width: 186px;
-    border: 3px solid rgba(187, 196, 195, 0.3);
-    background-color: rgba(0, 0, 0, 0.4);
+
+    .upload-icon {
+      margin: 83px 0 0 82px;
+      height: 21px;
+      width: 20px;
+    }
+
+    .image {
+      margin: 3px 0 0 3px;
+      border-radius: 50%;
+      height: 180px;
+      width: 180px;
+    }
   }
 
   .form-container {

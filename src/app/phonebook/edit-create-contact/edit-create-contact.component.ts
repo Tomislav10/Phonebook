@@ -14,6 +14,7 @@ import {PhonebookItem} from '../../shared/interface/phonebookItem';
 export class EditCreateContactComponent implements OnInit {
 
   public contactItemForm: FormGroup;
+  public image;
 
   public currentContact$ = this.store.pipe(select(getCurrentItem));
   public mode: { edit?: boolean, create?: boolean };
@@ -32,13 +33,13 @@ export class EditCreateContactComponent implements OnInit {
       this.currentContact$.subscribe(data => {
         this.contactItemForm.setValue({name: data.name, email: data.email, contacts: data.contacts});
         this.currentConntact = data;
+        this.image = data.img;
       });
     }
   }
 
   public submitForm() {
-    this.store.dispatch(new AddItem({data: {...this.currentConntact, ...this.contactItemForm.value}}));
-    console.log('submit');
+    this.store.dispatch(new AddItem({data: {...this.currentConntact, ...this.contactItemForm.value, img: this.image}}));
   }
 
   private setForm(): void {
@@ -47,5 +48,15 @@ export class EditCreateContactComponent implements OnInit {
       email: new FormControl('', []),
       contacts: new FormControl('', [])
     });
+  }
+
+  public updateProfilePhoto(event: Event) {
+    const file = event.target['files'][0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      this.image = (reader.result);
+    };
+
   }
 }

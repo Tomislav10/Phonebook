@@ -33,22 +33,21 @@
         color: #BBC4C3;
       }
 
-      img:nth-child(1) {
+      img {
         &:hover {
           cursor: pointer;
           filter: invert(52%) sepia(44%) saturate(699%) hue-rotate(137deg) brightness(95%) contrast(81%);
         }
-
-        outline: 0;
-        padding-left: 8px;
-      }
-
-      img:last-child {
-        &:hover {
-          cursor: pointer;
-          filter: invert(52%) sepia(44%) saturate(699%) hue-rotate(137deg) brightness(95%) contrast(81%);
+        &:focus {
+          outline: 0;
         }
-        margin-left: 44px;
+        &:nth-child(1) {
+          padding-left: 8px;
+        }
+
+        &:last-child {
+          margin-left: 44px;
+        }
       }
 
       span {
@@ -69,7 +68,6 @@
     .contact-info {
       display: grid;
       padding-left: 65px;
-      grid-template-columns: 3fr;
       grid-template-columns: 30px 95px auto;
 
       img {
@@ -80,11 +78,10 @@
       span {
         color: #2DA1AD;
         font-family: Lato-Bold;
-      }
-
-      span:last-child {
+        &:last-child {
           color: #BBC4C3;
           font-family: Lato;
+        }
       }
     }
 

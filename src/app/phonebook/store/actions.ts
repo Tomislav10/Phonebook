@@ -37,11 +37,7 @@ export class GetItemSuccess implements Action {
 export class AddItem implements Action {
   public readonly type = ADD_ITEM;
 
-  constructor(public payload: { data: PhonebookItem; }) {
-    console.log(payload.data);
-    console.log(payload.data);
-    console.log(payload.data);
-  }
+  constructor(public payload: { data: PhonebookItem; }) {}
 }
 
 export class DeleteItem implements Action {
