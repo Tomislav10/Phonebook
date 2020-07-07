@@ -1,10 +1,10 @@
 import { Action } from '@ngrx/store';
-import {PhonebookItem} from '../../shared/interface/phonebookItem';
 import {GetItemsListSuccess, GetItemSuccess} from './actions';
+import {Contact} from '../../shared/interface/contact';
 
 export interface PhonebookState {
-  contactsList?: PhonebookItem[];
-  currentContact?: PhonebookItem;
+  contactsList?: Contact[];
+  currentContact?: Contact;
 }
 
 export function phonebookReducer(

@@ -1,4 +1,4 @@
-export interface PhonebookItem {
+export interface Contact {
   id: number;
   name: string;
   email: string;

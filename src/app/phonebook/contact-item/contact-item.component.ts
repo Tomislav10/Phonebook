@@ -1,9 +1,9 @@
 import {Component, Input} from '@angular/core';
 import {Store} from '@ngrx/store';
 import {DialogService} from '../../shared/confiramtion-dialog/dialog.service';
-import {PhonebookItem} from '../../shared/interface/phonebookItem';
 import {PhonebookState} from '../store';
 import {DeleteItem, UpdateItem} from '../store/actions';
+import {Contact} from '../../shared/interface/contact';
 
 @Component({
   selector: 'app-contact-item',
@@ -16,7 +16,7 @@ export class ContactItemComponent {
     private dialogService: DialogService
   ) {}
 
-  @Input() item: PhonebookItem;
+  @Input() item: Contact;
 
   public setItemFavorite() {
     this.store.dispatch(new UpdateItem(

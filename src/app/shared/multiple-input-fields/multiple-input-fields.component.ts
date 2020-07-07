@@ -10,7 +10,7 @@ import {
   Validator,
   Validators
 } from '@angular/forms';
-import {PhoneNumbers} from '../interface/phonebookItem';
+import {PhoneNumbers} from '../interface/contact';
 
 @Component({
   selector: 'app-multiple-input-fields',

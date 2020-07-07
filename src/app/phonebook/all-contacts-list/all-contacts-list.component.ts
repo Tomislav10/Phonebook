@@ -3,8 +3,8 @@ import {select, Store} from '@ngrx/store';
 import {NgForm} from '@angular/forms';
 import {combineLatest, Observable, of} from 'rxjs';
 import {map} from 'rxjs/operators';
-import {PhonebookItem} from '../../shared/interface/phonebookItem';
 import {getAllPhonebookItems, PhonebookState} from '../store';
+import {Contact} from '../../shared/interface/contact';
 
 @Component({
   selector: 'app-all-contacts-list',
@@ -15,7 +15,7 @@ export class AllContactsListComponent implements OnInit {
   @ViewChild('form') ngForm: NgForm;
 
   private readonly allPhonebookItems$ = this.store.pipe(select(getAllPhonebookItems));
-  public filteredPhonebookItems$: Observable<PhonebookItem[]> = of([]);
+  public filteredPhonebookItems$: Observable<Contact[]> = of([]);
 
   public searchField: string;
 

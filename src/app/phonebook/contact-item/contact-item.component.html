@@ -2,7 +2,7 @@
   <div class="favorites">
     <i (click)="setItemFavorite()" [ngClass]="item.favorite ? 'fas fa-heart' : 'far fa-heart'"></i>
   </div>
-  <div class="profile-photo"><img [src]="item.img"/></div>
+  <div class="profile-photo"><img [src]="item.img" onerror="src='../../../assets/svg-icons/x.svg'"/></div>
   <div class="actions">
     <img src="../assets/svg-icons/edit.svg" [routerLink]="['../edit', item.id]">
     <img src="../assets/svg-icons/trash.svg" (click)="$event.stopPropagation(); openDialog('delete-confirmation' + item.id)">

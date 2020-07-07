@@ -1,5 +1,5 @@
 import {Action} from '@ngrx/store';
-import {PhonebookItem} from '../../shared/interface/phonebookItem';
+import {Contact} from '../../shared/interface/contact';
 
 export const ADD_ITEM = '[Phonebook] Add item';
 export const DELETE_ITEM = '[Phonebook] Delete item';
@@ -16,7 +16,7 @@ export class GetItemsListRequest implements Action {
 export class GetItemsListSuccess implements Action {
   public readonly type = GET_ITEMS_LIST_SUCCESS;
 
-  constructor(public data: PhonebookItem[]) {
+  constructor(public data: Contact[]) {
   }
 }
 
@@ -30,14 +30,14 @@ export class GetItemRequest implements Action {
 export class GetItemSuccess implements Action {
   public readonly type = GET_ITEM_SUCCESS;
 
-  constructor(public data: PhonebookItem) {
+  constructor(public data: Contact) {
   }
 }
 
 export class AddItem implements Action {
   public readonly type = ADD_ITEM;
 
-  constructor(public payload: { data: PhonebookItem; }) {}
+  constructor(public payload: { data: Contact; }) {}
 }
 
 export class DeleteItem implements Action {
@@ -50,6 +50,6 @@ export class DeleteItem implements Action {
 export class UpdateItem implements Action {
   public readonly type = UPDATE_ITEM;
 
-  constructor(public payload: { id: number, data: PhonebookItem }) {
+  constructor(public payload: { id: number, data: Contact }) {
   }
 }

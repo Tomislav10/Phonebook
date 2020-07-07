@@ -2,9 +2,9 @@ import {Injectable} from '@angular/core';
 import {Actions, createEffect, ofType} from '@ngrx/effects';
 import {map, mergeMap, switchMap} from 'rxjs/operators';
 import {HttpClient} from '@angular/common/http';
-import {PhonebookItem} from '../../shared/interface/phonebookItem';
 import {PhonebookActions} from './action-types';
 import {ADD_ITEM, DELETE_ITEM, GET_ITEM_REQUEST, GET_ITEMS_LIST_REQUEST, GetItemsListSuccess, UPDATE_ITEM} from './actions';
+import {Contact} from '../../shared/interface/contact';
 
 @Injectable()
 export class Effects {
@@ -18,9 +18,9 @@ export class Effects {
     () => this.action$.pipe(
       ofType<PhonebookActions.GetItemsListRequest>(GET_ITEMS_LIST_REQUEST),
       switchMap(() =>
-        this.http.get<PhonebookItem[]>(this.apiEndpoint)
+        this.http.get<Contact[]>(this.apiEndpoint)
           .pipe(
-            map((data: PhonebookItem[]) => new GetItemsListSuccess(data))
+            map((data: Contact[]) => new GetItemsListSuccess(data))
           )
       )
     )
@@ -32,7 +32,7 @@ export class Effects {
       switchMap((action) => {
         return this.http.get(`${this.apiEndpoint}/${action.payload.id}`)
           .pipe(
-            map((data: PhonebookItem) => new PhonebookActions.GetItemSuccess(data))
+            map((data: Contact) => new PhonebookActions.GetItemSuccess(data))
           );
       })
     )
@@ -44,7 +44,7 @@ export class Effects {
       switchMap((action) => {
         return this.http.post(this.apiEndpoint, action.payload.data)
           .pipe(
-            map((data: PhonebookItem[]) => new PhonebookActions.GetItemsListRequest)
+            map((data: Contact[]) => new PhonebookActions.GetItemsListRequest)
           );
       })
     )
@@ -56,7 +56,7 @@ export class Effects {
       switchMap((action) => {
         return this.http.delete(`${this.apiEndpoint}/${action.payload.id}`)
           .pipe(
-            map((data: PhonebookItem[]) => new PhonebookActions.GetItemsListRequest)
+            map((data: Contact[]) => new PhonebookActions.GetItemsListRequest)
           );
       })
     )
@@ -68,7 +68,7 @@ export class Effects {
       switchMap((action) => {
         return this.http.put(`${this.apiEndpoint}/${action.payload.id}`, action.payload.data)
           .pipe(
-            mergeMap((data: PhonebookItem[]) => [
+            mergeMap((data: Contact[]) => [
               new PhonebookActions.GetItemRequest({id: (action.payload.id).toString()}),
               new PhonebookActions.GetItemsListRequest
             ])

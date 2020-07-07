@@ -1,10 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {select, Store} from '@ngrx/store';
-import {ActivatedRoute, Data} from '@angular/router';
+import {ActivatedRoute, Data, Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {getCurrentItem, PhonebookState} from '../store';
-import {AddItem} from '../store/actions';
-import {PhonebookItem} from '../../shared/interface/phonebookItem';
+import {AddItem, DeleteItem} from '../store/actions';
+import {Contact} from '../../shared/interface/contact';
+import {DialogService} from '../../shared/confiramtion-dialog/dialog.service';
 
 @Component({
   selector: 'app-edit-create-contact',
@@ -18,11 +19,13 @@ export class EditCreateContactComponent implements OnInit {
 
   public currentContact$ = this.store.pipe(select(getCurrentItem));
   public mode: { edit?: boolean, create?: boolean };
-  private currentConntact?: PhonebookItem;
+  private currentConntact?: Contact;
 
   constructor(
     private store: Store<PhonebookState>,
-    private activeRoute: ActivatedRoute
+    private activeRoute: ActivatedRoute,
+    private dialogService: DialogService,
+    private router: Router
   ) {
     activeRoute.data.subscribe((data: Data) => this.mode = data);
     this.setForm();
@@ -39,7 +42,8 @@ export class EditCreateContactComponent implements OnInit {
   }
 
   public submitForm() {
-    this.store.dispatch(new AddItem({data: {...this.currentConntact, ...this.contactItemForm.value, img: this.image}}));
+    this.store.dispatch(new AddItem({data: {...this.currentConntact, ...this.contactItemForm.value}}));
+    this.router.navigate([this.mode.create ? '../' : '../../']);
   }
 
   private setForm(): void {
@@ -57,6 +61,14 @@ export class EditCreateContactComponent implements OnInit {
     reader.onload = () => {
       this.image = (reader.result);
     };
+  }
 
+  public openDialog(id: string) {
+    this.dialogService.open(id);
+  }
+
+  public confirmDelete(event: boolean) {
+    this.store.dispatch(new DeleteItem({id: this.currentConntact.id}));
+    this.router.navigate(['../../']);
   }
 }

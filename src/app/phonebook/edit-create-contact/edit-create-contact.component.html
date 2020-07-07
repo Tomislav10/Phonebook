@@ -10,7 +10,7 @@
   <div class="form-container">
     <div class="actions-section">
       <img src="../assets/svg-icons/back-button.svg" [routerLink]="mode.create ? '../' : '../../'">
-      <div *ngIf="mode.edit">
+      <div *ngIf="mode.edit" (click)="openDialog('delete-confirmation' + currentConntact.id)">
         <span>Delete</span>
         <img src="../assets/svg-icons/trash.svg">
       </div>
@@ -46,3 +46,6 @@
     </form>
   </div>
 </div>
+
+<app-confirmation-dialog *ngIf="mode.edit" [id]="'delete-confirmation' + currentConntact.id" (confirmDelete)="confirmDelete($event)">
+</app-confirmation-dialog>
