@@ -30,6 +30,10 @@ const routes: Routes = [
       resolve: {dataLoaded: PhonebookResolverService}
     },
     {
+      path: 'edit/:id',
+      component: CreateNewItemComponent
+    },
+    {
       path: 'create',
       component: CreateNewItemComponent
     }

@@ -3,6 +3,7 @@ import {PhonebookItem} from '../interface/phonebookItem';
 import {Store} from '@ngrx/store';
 import {PhonebookState} from '../store/phonebook.reducers';
 import {PhonebookActions} from '../store/phonebook-action-types';
+import {DialogService} from '../../shared/confiramtion-dialog/dialog.service';
 
 @Component({
   selector: 'app-phonebook-list-item',
@@ -10,7 +11,10 @@ import {PhonebookActions} from '../store/phonebook-action-types';
   styleUrls: ['./phonebook-list-item.component.scss']
 })
 export class PhonebookListItemComponent {
-  constructor(private store: Store<PhonebookState>) {}
+  constructor(
+    private store: Store<PhonebookState>,
+    private dialogService: DialogService
+  ) {}
 
   @Input() item: PhonebookItem;
 
@@ -18,5 +22,10 @@ export class PhonebookListItemComponent {
     this.store.dispatch(new PhonebookActions.UpdateItem(
       {id: this.item.id, data: {...this.item, favorite: !this.item.favorite }})
     );
+  }
+
+  openDialog(id: string) {
+    console.log(id);
+    this.dialogService.open(id);
   }
 }

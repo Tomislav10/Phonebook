@@ -3,6 +3,9 @@
     outline: 0;
   }
   &:hover {
+    .actions {
+      visibility: visible;
+    }
     cursor: pointer;
     border: 1px solid #2DA1AD;
   }
@@ -38,6 +41,14 @@
   }
 
   .actions {
+    visibility: hidden;
+    padding-top: 15px;
+    img:focus {
+      outline: 0;
+    }
+    img:last-child {
+      margin-left: 25px;
+    }
   }
 
   .name {
