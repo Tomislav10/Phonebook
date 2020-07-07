@@ -1,5 +1,5 @@
 import {Action, createAction} from '@ngrx/store';
-import {PhonebookItem} from '../interface/phonebookItem';
+import {PhonebookItem} from '../../shared/interface/phonebookItem';
 
 export const ADD_ITEM_DETAILS = '[Phonebook] Add item';
 export const DELETE_ITEM_DETAILS = '[Phonebook] Delete item';
@@ -41,5 +41,5 @@ export class UpdateItem implements Action {
 }
 
 export const UpdateItemSuccess = createAction(
-  GET_ITEM_SUCCESS_DETAILS
+  UPDATE_ITEM_SUCCESS_DETAILS
 );

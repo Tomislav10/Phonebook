@@ -27,6 +27,7 @@
 
       i {
         &:hover {
+          color: #2DA1AD;
           cursor: pointer;
         }
         color: #BBC4C3;
@@ -35,6 +36,7 @@
       img:nth-child(1) {
         &:hover {
           cursor: pointer;
+          filter: invert(52%) sepia(44%) saturate(699%) hue-rotate(137deg) brightness(95%) contrast(81%);
         }
 
         outline: 0;
@@ -44,6 +46,7 @@
       img:last-child {
         &:hover {
           cursor: pointer;
+          filter: invert(52%) sepia(44%) saturate(699%) hue-rotate(137deg) brightness(95%) contrast(81%);
         }
         margin-left: 44px;
       }
@@ -70,6 +73,7 @@
       grid-template-columns: 30px 95px auto;
 
       img {
+        margin-top: 6px;
         filter: invert(52%) sepia(44%) saturate(699%) hue-rotate(137deg) brightness(95%) contrast(81%);
       }
 
@@ -88,6 +92,10 @@
       padding-top: 71px;
       grid-template-columns: 30px 95px 89px auto;
       grid-template-rows: repeat(7, 60px);
+
+      img {
+        margin-top: 2px;
+      }
 
       .phone-numbers {
         color: #2DA1AD;

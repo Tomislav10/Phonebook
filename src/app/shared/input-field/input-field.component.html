@@ -1,7 +1,7 @@
 <div class="input-container">
   <div class="label">
-    <img src="../../../assets/svg-icons/user.svg">
-    <span>full name</span>
+    <img [src]=imgSrc>
+    <span>{{ label }}</span>
   </div>
-  <input type="text" placeholder="Full name">
+  <input type="text" [placeholder]="label.charAt(0).toUpperCase() + label.slice(1)">
 </div>

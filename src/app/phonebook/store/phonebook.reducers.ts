@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 import {GetItemsSuccess} from './phonebook.actions';
-import {PhonebookItem} from '../interface/phonebookItem';
+import {PhonebookItem} from '../../shared/interface/phonebookItem';
 
 export interface PhonebookState {
   phonebook: PhonebookItem[];

@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {Actions, createEffect, ofType} from '@ngrx/effects';
 import {PhonebookActions} from './phonebook-action-types';
 import {map, switchMap} from 'rxjs/operators';
-import {PhonebookItem} from '../interface/phonebookItem';
 import {HttpClient} from '@angular/common/http';
 import {
   ADD_ITEM_DETAILS,
@@ -10,6 +9,7 @@ import {
   GetItemsSuccess,
   UPDATE_ITEM_REQUEST_DETAILS
 } from './phonebook.actions';
+import {PhonebookItem} from '../../shared/interface/phonebookItem';
 
 @Injectable()
 export class PhonebookEffects {

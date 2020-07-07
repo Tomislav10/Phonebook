@@ -5,7 +5,7 @@ import {PhonebookState} from '../store/phonebook.reducers';
 import {NgForm} from '@angular/forms';
 import {combineLatest, Observable, of} from 'rxjs';
 import {map} from 'rxjs/operators';
-import {PhonebookItem} from '../interface/phonebookItem';
+import {PhonebookItem} from '../../shared/interface/phonebookItem';
 
 @Component({
   selector: 'app-all-contacts-list',

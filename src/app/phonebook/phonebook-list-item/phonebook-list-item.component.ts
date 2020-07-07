@@ -1,10 +1,10 @@
 import {Component, Input} from '@angular/core';
-import {PhonebookItem} from '../interface/phonebookItem';
 import {Store} from '@ngrx/store';
 import {PhonebookState} from '../store/phonebook.reducers';
 import {PhonebookActions} from '../store/phonebook-action-types';
 import {DialogService} from '../../shared/confiramtion-dialog/dialog.service';
 import {DeleteItem} from '../store/phonebook.actions';
+import {PhonebookItem} from '../../shared/interface/phonebookItem';
 
 @Component({
   selector: 'app-phonebook-list-item',

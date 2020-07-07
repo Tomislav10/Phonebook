@@ -39,6 +39,10 @@
   }
 
   .delete-button {
+      &:hover {
+        cursor: pointer;
+        filter: invert(52%) sepia(65%) saturate(453%) hue-rotate(137deg) brightness(91%) contrast(90%);
+      }
       margin-top: 14.5px;
       height: 31px;
       width: 31px;
@@ -54,6 +58,9 @@
   .add-button-container {
     display: flex;
     padding-bottom: 101px;
+    &:hover {
+      cursor: pointer;
+    }
     .add-button {
       margin-top: 43px;
       height: 31px;

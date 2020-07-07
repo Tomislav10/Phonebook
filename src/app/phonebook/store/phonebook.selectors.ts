@@ -1,7 +1,5 @@
 import {createFeatureSelector, createSelector} from '@ngrx/store';
 import {PhonebookState} from './phonebook.reducers';
-import {map} from 'rxjs/operators';
-import {PhonebookItem} from '../interface/phonebookItem';
 
 export const selectPhonebookState = createFeatureSelector<PhonebookState>('phonebookState');
 
