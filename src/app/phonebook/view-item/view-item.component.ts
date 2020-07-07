@@ -1,10 +1,10 @@
 import {Component} from '@angular/core';
 import {Router} from '@angular/router';
 import {Store} from '@ngrx/store';
+import {map} from 'rxjs/operators';
 import {PhonebookState} from '../store/phonebook.reducers';
 import {getAllPhonebookItems} from '../store/phonebook.selectors';
-import {map} from 'rxjs/operators';
-import {PhonebookActions} from '../store/phonebook-action-types';
+import {UpdateItem} from '../store/phonebook.actions';
 
 @Component({
   selector: 'app-view-item',
@@ -26,7 +26,7 @@ export class ViewItemComponent {
   }
 
   public setItemFavorite(itemDetails) {
-    this.store.dispatch(new PhonebookActions.UpdateItem(
+    this.store.dispatch(new UpdateItem(
       {id: itemDetails.id, data: {...itemDetails, favorite: !itemDetails.favorite }})
     );
   }

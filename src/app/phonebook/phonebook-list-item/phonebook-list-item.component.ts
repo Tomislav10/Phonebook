@@ -1,10 +1,9 @@
 import {Component, Input} from '@angular/core';
 import {Store} from '@ngrx/store';
-import {PhonebookState} from '../store/phonebook.reducers';
-import {PhonebookActions} from '../store/phonebook-action-types';
 import {DialogService} from '../../shared/confiramtion-dialog/dialog.service';
-import {DeleteItem} from '../store/phonebook.actions';
 import {PhonebookItem} from '../../shared/interface/phonebookItem';
+import {DeleteItem, UpdateItem} from '../store/phonebook.actions';
+import {PhonebookState} from '../store/phonebook.reducers';
 
 @Component({
   selector: 'app-phonebook-list-item',
@@ -20,7 +19,7 @@ export class PhonebookListItemComponent {
   @Input() item: PhonebookItem;
 
   public setItemFavorite() {
-    this.store.dispatch(new PhonebookActions.UpdateItem(
+    this.store.dispatch(new UpdateItem(
       {id: this.item.id, data: {...this.item, favorite: !this.item.favorite }})
     );
   }

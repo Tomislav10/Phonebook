@@ -7,8 +7,6 @@ import {PhonebookRoutingModule} from './phonebook-routing.module';
 import {SharedModule} from '../shared/shared.module';
 import {StoreModule} from '@ngrx/store';
 import {EffectsModule} from '@ngrx/effects';
-import {PhonebookEffects} from './store/phonebook.effects';
-import {phonebookReducer} from './store/phonebook.reducers';
 import {PhonebookResolverService} from './phonebook-resolver.service';
 import {AddNewItemComponent} from './add-new-item/add-new-item.component';
 import {CreateNewItemComponent} from './create-new-item/create-new-item.component';
@@ -16,6 +14,9 @@ import {AllContactsListComponent} from './all-contacts-list/all-contacts-list.co
 import {FavoriteItemsListComponent} from './favorite-items-list/favorite-items-list.component';
 import {ViewItemComponent} from './view-item/view-item.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {phonebookReducer} from './store/phonebook.reducers';
+import {PhonebookEffects} from './store/phonebook.effects';
+
 
 @NgModule({
   declarations: [

@@ -1,7 +1,7 @@
-<div class="item-container">
-  <div class="upload-image"></div>
+<div class="item-container" *ngIf="itemDetails$ | async; let item">
+  <img class="upload-image" [src]="item.img">
 
-  <div class="form-container" *ngIf="itemDetails$ | async; let item">
+  <div class="form-container">
     <div class="actions-section">
       <img src="../assets/svg-icons/back-button.svg" [routerLink]="'../../'">
       <span>{{ item.name }}</span>
@@ -17,7 +17,7 @@
     <div class="contact-info">
       <img class="phone-numbers" src="../assets/svg-icons/phone.svg">
       <span class="phone-numbers">numbers</span>
-      <ng-container *ngFor="let numbers of item.phoneNumbers">
+      <ng-container *ngFor="let numbers of item.contacts">
         <span>{{ numbers.type }}</span>
         <span>{{ numbers.number }}</span>
       </ng-container>

@@ -3,7 +3,7 @@ export interface PhonebookItem {
   name: string;
   email: string;
   favorite: boolean;
-  phoneNumbers: PhoneNumbers[];
+  contacts: PhoneNumbers[];
   img: string;
 }
 

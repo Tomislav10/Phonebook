@@ -1,5 +1,5 @@
 <div class="item-container">
-  <div class="upload-image" (click)="aaa()"></div>
+  <img class="upload-image" [src]="(da | async).img">
 
   <div class="form-container">
     <div class="actions-section">
@@ -13,13 +13,13 @@
       <div class="divider"></div>
 
       <div class="input-field">
-        <app-input-field [label]="'full name'" [imgSrc]="'../../../assets/svg-icons/user.svg'"></app-input-field>
+        <app-input-field formControlName="name" label="full name" [imgSrc]="'../../../assets/svg-icons/user.svg'"></app-input-field>
       </div>
 
       <div class="divider"></div>
 
       <div class="input-field">
-        <app-input-field [label]="'email'" [imgSrc]="'../../../assets/svg-icons/mail.svg'"></app-input-field>
+        <app-input-field formControlName="email" label="email" [imgSrc]="'../../../assets/svg-icons/mail.svg'"></app-input-field>
       </div>
 
       <div class="divider"></div>

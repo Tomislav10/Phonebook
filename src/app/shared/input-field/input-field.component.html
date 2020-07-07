@@ -3,5 +3,9 @@
     <img [src]=imgSrc>
     <span>{{ label }}</span>
   </div>
-  <input type="text" [placeholder]="label.charAt(0).toUpperCase() + label.slice(1)">
+  <input
+    [ngClass]="field.touched && field.hasError('required') ? 'field-error' : undefined"
+    [formControl]="field"
+    type="text"
+    [placeholder]="label.charAt(0).toUpperCase() + label.slice(1)">
 </div>

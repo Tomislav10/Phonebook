@@ -14,8 +14,13 @@
     }
   }
 
+  .field-error {
+    border: 1px solid #c40a00;
+  }
+
   input {
     &:focus {
+      border: 1px solid #2DA1AD;
       outline: 0;
     }
     box-sizing: border-box;

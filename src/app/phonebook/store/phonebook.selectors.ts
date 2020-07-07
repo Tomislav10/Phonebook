@@ -5,12 +5,12 @@ export const selectPhonebookState = createFeatureSelector<PhonebookState>('phone
 
 export const getAllPhonebookItems = createSelector(
   selectPhonebookState,
-  (state) => state && state.phonebook
+  (state) => state && state.contactsList
 );
 
 export const getFavoritePhonebookItems = createSelector(
   selectPhonebookState,
-  (state) => state.phonebook.filter(
+  (state) => state.contactsList.filter(
     item => item.favorite
   )
 );

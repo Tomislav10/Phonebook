@@ -11,7 +11,7 @@ import {StoreModule} from '@ngrx/store';
 import {EffectsModule} from '@ngrx/effects';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {environment} from '../environments/environment';
-import {appState, metaReducers} from './store/app-state';
+import {appState, metaReducers} from './store';
 
 @NgModule({
   declarations: [
@@ -27,7 +27,6 @@ import {appState, metaReducers} from './store/app-state';
     AppRoutingModule,
     EffectsModule.forRoot([]),
     StoreModule.forRoot(appState, {
-      metaReducers,
       runtimeChecks: {
         strictStateImmutability: true,
         strictActionImmutability: true

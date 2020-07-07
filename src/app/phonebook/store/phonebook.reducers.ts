@@ -3,15 +3,15 @@ import {GetItemsSuccess} from './phonebook.actions';
 import {PhonebookItem} from '../../shared/interface/phonebookItem';
 
 export interface PhonebookState {
-  phonebook: PhonebookItem[];
+  contactsList: PhonebookItem[];
 }
 
 export function phonebookReducer(
   phonebookState: PhonebookState,
   action: Action
-): PhonebookState {
+) {
   if (action instanceof GetItemsSuccess) {
-    return {phonebook: action.data};
+    return {contactsList: action.data};
   }
 
   return phonebookState;
