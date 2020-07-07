@@ -1,11 +1,6 @@
-.input-container {
-  display: grid;
-  width: 630px;
-  grid-template-columns: 3fr;
-  grid-column-gap: 29px;
+.contact-container {
 
   .label {
-    grid-column: 1/4;
     height: 41px;
 
     span {
@@ -18,58 +13,78 @@
     }
   }
 
-  input {
-    &.number-type {
-      width: 300px;
-    }
+  .input-container {
+    display: grid;
+    grid-template-columns: 300px 240px auto;
+    grid-column-gap: 30px;
 
-    &.extend {
-      grid-column: 2/4;
-      width: 300px;
-    }
-
-    &.shortened {
-      width: 240px;
-    }
-
-    &:focus {
+    .delete-button:hover ~ input {
       border: 1px solid #2DA1AD;
-      outline: 0;
     }
 
-    justify-self: start;
-    box-sizing: border-box;
-    height: 60px;
-    border: 1px solid #BBC4C3;
-    opacity: 0.4;
-    border-radius: 4px;
-    padding-left: 30px;
-  }
-
-  .field-error {
-    border: 1px solid #c40a00;
-  }
-
-  input:not(:last-child) {
-    margin-bottom: 30px;
-  }
-
-  .delete-button {
-    &:hover {
-      cursor: pointer;
-      filter: invert(52%) sepia(65%) saturate(453%) hue-rotate(137deg) brightness(91%) contrast(90%);
+    & > .number-type {
+      grid-column-start: 1;
+      grid-row-start: 1;
     }
 
-    margin-top: 14.5px;
-    height: 31px;
-    width: 31px;
-    border: 1px solid #BBC4C3;
-    border-radius: 50%;
+    & > .delete-button {
+      grid-column-start: 3;
+      grid-row-start: 1;
+    }
 
-    img {
-      height: 8px;
-      width: 8px;
-      margin: 11px 0 0 11px;
+    input {
+      &.number-type {
+        width: 300px;
+      }
+
+      &.extend {
+        grid-column: 2/4;
+        width: 300px;
+      }
+
+      &.shortened {
+        width: 240px;
+      }
+
+      &:focus {
+        border: 1px solid #2DA1AD;
+        outline: 0;
+      }
+
+      justify-self: start;
+      box-sizing: border-box;
+      height: 60px;
+      border: 1px solid #BBC4C3;
+      opacity: 0.4;
+      border-radius: 4px;
+      padding-left: 30px;
+    }
+
+    .field-error {
+      border: 1px solid #c40a00;
+    }
+
+    input:not(:last-child) {
+      margin-bottom: 30px;
+    }
+
+    .delete-button {
+      &:hover {
+        cursor: pointer;
+        filter: invert(52%) sepia(65%) saturate(453%) hue-rotate(137deg) brightness(91%) contrast(90%);
+      }
+
+      margin-top: 14.5px;
+      height: 31px;
+      width: 31px;
+      border: 1px solid #BBC4C3;
+      border-radius: 50%;
+
+      img {
+        height: 8px;
+        width: 8px;
+        margin: 11px 0 0 11px;
+      }
     }
   }
 

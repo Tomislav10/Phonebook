@@ -5,3 +5,7 @@
 app-confirmation-dialog {
   display: none;
 }
+
+body.dialog-open {
+  overflow: hidden;
+}

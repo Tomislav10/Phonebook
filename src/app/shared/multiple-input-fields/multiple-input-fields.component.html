@@ -1,11 +1,12 @@
-<div class="input-container">
+<div class="contact-container">
   <div class="label">
     <img src="../../../assets/svg-icons/phone.svg">
     <span>numbers</span>
     <span></span>
   </div>
   <ng-container *ngFor="let contact of form.controls; index as idx">
-    <ng-container [formGroup]="contact">
+    <form [formGroup]="contact" class="input-container">
+      <div class="delete-button" *ngIf="form.controls.length !== 1" (click)="removeContact(idx)"><img src="../assets/svg-icons/x.svg"></div>
       <input
         [class.field-error]="contact['controls'].label.touched && contact['controls'].label.hasError('required')"
         formControlName="label"
@@ -20,9 +21,7 @@
         type="text"
         maxlength="15"
         placeholder="Number">
-    </ng-container>
-      <div class="delete-button" *ngIf="form.controls.length !== 1" (click)="removeContact(idx)"><img src="../assets/svg-icons/x.svg"></div>
-
+    </form>
   </ng-container>
   <div class="add-button-container" *ngIf="form.controls.length < 5"  (click)="addNewContact()">
     <div class="add-button"><img src="../assets/svg-icons/x.svg"></div>
