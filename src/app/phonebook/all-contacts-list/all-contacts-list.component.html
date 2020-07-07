@@ -1,11 +1,11 @@
-<div class="search">
+<form #form="ngForm" class="search">
   <i class="fas fa-search"></i>
-  <input class="input-field" type="text">
-</div>
+  <input [(ngModel)]="searchField" name="searchField" class="input-field" type="text">
+</form>
 
 <div class="phonebook-items">
     <app-add-new-item></app-add-new-item>
-    <div *ngFor="let item of allPhonebookItems$ | async">
+    <div *ngFor="let item of filteredPhonebookItems$ | async">
       <app-phonebook-list-item
         [item]="item">
       </app-phonebook-list-item>

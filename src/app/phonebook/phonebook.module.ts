@@ -15,6 +15,7 @@ import {CreateNewItemComponent} from './create-new-item/create-new-item.componen
 import {AllContactsListComponent} from './all-contacts-list/all-contacts-list.component';
 import {FavoriteItemsListComponent} from './favorite-items-list/favorite-items-list.component';
 import {ViewItemComponent} from './view-item/view-item.component';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import {ViewItemComponent} from './view-item/view-item.component';
     HttpClientModule,
     PhonebookRoutingModule,
     StoreModule.forFeature('phonebookState', phonebookReducer),
-    EffectsModule.forFeature([PhonebookEffects])
+    EffectsModule.forFeature([PhonebookEffects]),
+    FormsModule
   ],
   providers: [PhonebookResolverService],
   bootstrap: [PhonebookComponent]
