@@ -4,6 +4,7 @@ import {Store} from '@ngrx/store';
 import {PhonebookState} from '../store/phonebook.reducers';
 import {PhonebookActions} from '../store/phonebook-action-types';
 import {DialogService} from '../../shared/confiramtion-dialog/dialog.service';
+import {DeleteItem} from '../store/phonebook.actions';
 
 @Component({
   selector: 'app-phonebook-list-item',
@@ -24,8 +25,12 @@ export class PhonebookListItemComponent {
     );
   }
 
-  openDialog(id: string) {
+  public openDialog(id: string) {
     console.log(id);
     this.dialogService.open(id);
+  }
+
+  public confirmDelete(event: boolean) {
+    this.store.dispatch(new DeleteItem({id: this.item.id}));
   }
 }

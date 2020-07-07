@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {DialogService} from './dialog.service';
 
 @Component({
@@ -8,6 +8,7 @@ import {DialogService} from './dialog.service';
 })
 export class ConfirmationDialogComponent implements OnInit, OnDestroy {
   @Input() id: string;
+  @Output() confirmDelete: EventEmitter<boolean> = new EventEmitter();
   private element: any;
 
   constructor(private dialogService: DialogService, private el: ElementRef) {
@@ -33,6 +34,7 @@ export class ConfirmationDialogComponent implements OnInit, OnDestroy {
   }
 
   confirm(): void {
+    this.confirmDelete.emit(true);
     this.element.style.display = 'none';
     document.body.classList.remove('dialog-open');
   }

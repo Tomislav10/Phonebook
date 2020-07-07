@@ -10,5 +10,5 @@
   <div class="name">{{ item.name }}</div>
 </div>
 
-<app-confirmation-dialog id="delete-confirmation">
+<app-confirmation-dialog id="delete-confirmation" (confirmDelete)="confirmDelete($event)">
 </app-confirmation-dialog>

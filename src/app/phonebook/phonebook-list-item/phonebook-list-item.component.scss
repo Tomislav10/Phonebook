@@ -2,17 +2,20 @@
   &:focus {
     outline: 0;
   }
+
   &:hover {
     .actions {
       visibility: visible;
     }
+
     cursor: pointer;
     border: 1px solid #2DA1AD;
   }
+
   box-sizing: border-box;
   height: 150px;
   width: 270px;
-  border: 1px solid rgba(187,196,195,0.4);
+  border: 1px solid rgba(187, 196, 195, 0.4);
   border-radius: 4px;
 
   display: grid;
@@ -21,7 +24,12 @@
 
   .favorites {
     padding: 15px 0 0 17px;
+
     i {
+      &:hover {
+        color: #2DA1AD;
+      }
+
       height: 14px;
       width: 15px;
       color: #BBC4C3;
@@ -31,6 +39,7 @@
   .profile-photo {
     text-align: center;
     padding-top: 26px;
+
     img {
       border-radius: 50%;
       box-sizing: border-box;
@@ -43,11 +52,19 @@
   .actions {
     visibility: hidden;
     padding-top: 15px;
-    img:focus {
-      outline: 0;
-    }
-    img:last-child {
-      margin-left: 25px;
+
+    img {
+      &:focus {
+        outline: 0;
+      }
+
+      &:hover {
+        filter: invert(52%) sepia(44%) saturate(699%) hue-rotate(137deg) brightness(95%) contrast(81%);
+      }
+
+      &:last-child {
+        margin-left: 25px;
+      }
     }
   }
 
