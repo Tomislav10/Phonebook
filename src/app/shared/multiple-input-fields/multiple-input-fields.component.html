@@ -8,19 +8,19 @@
     <form [formGroup]="contact" class="input-container">
       <div class="delete-button" *ngIf="form.controls.length !== 1" (click)="removeContact(idx)"><img src="../assets/svg-icons/x.svg"></div>
       <input
-        [class.field-error]="contact['controls'].label.touched && contact['controls'].label.hasError('required')"
-        formControlName="label"
-        class="number-type"
-        type="text"
-        maxlength="10"
-        placeholder="Label">
-      <input
         [class.field-error]="contact['controls'].number.touched && contact['controls'].number.hasError('required')"
-        [ngClass]="form.controls.length === 1 ? 'extend' : 'shortened'"
         formControlName="number"
+        class="number-type"
         type="text"
         maxlength="15"
         placeholder="Number">
+      <input
+        [class.field-error]="contact['controls'].label.touched && contact['controls'].label.hasError('required')"
+        [ngClass]="form.controls.length === 1 ? 'extend' : 'shortened'"
+        formControlName="label"
+        type="text"
+        maxlength="10"
+        placeholder="Label">
     </form>
   </ng-container>
   <div class="add-button-container" *ngIf="form.controls.length < 5"  (click)="addNewContact()">

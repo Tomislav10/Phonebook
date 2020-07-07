@@ -42,7 +42,7 @@ export class EditCreateContactComponent implements OnInit {
   }
 
   public submitForm() {
-    this.store.dispatch(new AddItem({data: {...this.currentConntact, ...this.contactItemForm.value}}));
+    this.store.dispatch(new AddItem({data: {...this.currentConntact, ...this.contactItemForm.value, img: this.image }}));
     this.router.navigate([this.mode.create ? '../' : '../../']);
   }
 

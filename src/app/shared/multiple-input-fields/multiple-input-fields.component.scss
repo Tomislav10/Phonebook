@@ -18,15 +18,6 @@
     grid-template-columns: 300px 240px auto;
     grid-column-gap: 30px;
 
-    .delete-button:hover ~ input {
-      border: 1px solid #2DA1AD;
-    }
-
-    & > .number-type {
-      grid-column-start: 1;
-      grid-row-start: 1;
-    }
-
     & > .delete-button {
       grid-column-start: 3;
       grid-row-start: 1;
@@ -66,6 +57,10 @@
 
     input:not(:last-child) {
       margin-bottom: 30px;
+    }
+
+    .delete-button:hover ~ input {
+      border: 1px solid #2DA1AD;
     }
 
     .delete-button {
