@@ -23,9 +23,12 @@
 
     .actions-section {
       display: grid;
-      grid-template-columns: 45px 512px 59px 21px;
+      grid-template-columns: 45px 512px 15px 21px;
 
       i {
+        &:hover {
+          cursor: pointer;
+        }
         color: #BBC4C3;
       }
 
@@ -36,6 +39,13 @@
 
         outline: 0;
         padding-left: 8px;
+      }
+
+      img:last-child {
+        &:hover {
+          cursor: pointer;
+        }
+        margin-left: 44px;
       }
 
       span {
