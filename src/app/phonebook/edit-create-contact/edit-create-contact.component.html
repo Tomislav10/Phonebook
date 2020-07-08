@@ -1,17 +1,21 @@
 <div class="item-container">
-  <label for="file-upload" class="upload-image"
-         [style.background-color]="image ? 'rgba(0, 0, 0, 0.4)' : 'rgba(45,161,173,0.4)'">
-    <img [src]="image" *ngIf="image" class="image">
-    <img src="../assets/svg-icons/upload.svg" class="upload-icon">
-    <input id="file-upload" hidden type="file" (change)="updateProfilePhoto($event)"/>
-  </label>
-
+  <div class="profile-photo">
+    <label for="file-upload" class="upload-image clickable"
+           [style.background-color]="image ? 'rgba(0, 0, 0, 0.4)' : 'rgba(45,161,173,0.4)'">
+      <img src="../assets/svg-icons/upload.svg" class="upload-icon">
+      <img *ngIf="image" [src]="image" class="image">
+      <input id="file-upload" hidden type="file" accept=".png, .jpg, .jpeg" (change)="updateProfilePhoto($event)"/>
+    </label>
+    <div class="overlay-svg" *ngIf="image" (click)="removePhoto()">
+      <img src="../assets/svg-icons/white-x.svg">
+    </div>
+  </div>
 
   <div class="form-container">
     <div class="actions-section">
-      <img src="../assets/svg-icons/back-button.svg" [routerLink]="'../../'">
+      <img class="clickable" src="../assets/svg-icons/back-button.svg" [routerLink]="'../../'">
       <div *ngIf="mode.edit" (click)="openDialog('delete-confirmation' + currentContact.id)">
-        <span>Delete</span>
+        <span class="delete-icon-text">Delete</span>
         <img src="../assets/svg-icons/trash.svg">
       </div>
     </div>
@@ -22,7 +26,7 @@
         <app-input-field
           formControlName="name"
           [required]="true"
-          label="Full name"
+          label="full name"
           [imgSrc]="'../../../assets/svg-icons/user.svg'">
         </app-input-field>
       </div>
@@ -34,7 +38,7 @@
           formControlName="email"
           [required]="false"
           [email]="true"
-          label="Email"
+          label="email"
           [imgSrc]="'../../../assets/svg-icons/mail.svg'">
         </app-input-field>
       </div>
@@ -47,10 +51,12 @@
 
       <div class="button-container">
         <button
+          class="clickable button-text"
           type="button"
           [routerLink]="mode.create ? '../' : '../../'"
         >Cancel</button>
         <button
+          class="clickable button-text"
           type="button"
           (click)="submitForm()"
         >Save</button>

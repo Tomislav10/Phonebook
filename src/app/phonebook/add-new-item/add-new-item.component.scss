@@ -1,4 +1,6 @@
-.item-container {
+@import '../../../styles/variables';
+
+.new-item-container {
   height: 150px;
   width: 270px;
   background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='4' ry='4' stroke='%232DA1ADFF' stroke-width='1' stroke-dasharray='5' stroke-dashoffset='49' stroke-linecap='square'/%3e%3c/svg%3e");
@@ -7,11 +9,6 @@
 
   &:hover {
     opacity: 1;
-    cursor: pointer;
-  }
-
-  &:focus {
-    outline: 0;
   }
 
   .add-icon {
@@ -28,9 +25,6 @@
     span {
       justify-self: center;
       padding-top: 11px;
-      color: #2DA1AD;
-      font-family: Lato;
-      font-size: 16px;
     }
   }
 }

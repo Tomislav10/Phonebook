@@ -1,38 +1,28 @@
+@import '../../../styles/variables';
+
 .item-container {
-  &:focus {
-    outline: 0;
-  }
-
-  &:hover {
-    .actions {
-      visibility: visible;
-    }
-
-    cursor: pointer;
-    border: 1px solid #2DA1AD;
-  }
-
   box-sizing: border-box;
   height: 150px;
   width: 270px;
   border: 1px solid rgba(187, 196, 195, 0.4);
   border-radius: 4px;
-
   display: grid;
   grid-template-columns: 72px 126px 72px;
   grid-auto-rows: minmax(105px, auto);
+
+  &:hover {
+    .actions {
+      visibility: visible;
+    }
+  }
 
   .favorites {
     padding: 15px 0 0 17px;
 
     i {
-      &:hover {
-        color: #2DA1AD;
-      }
-
       height: 14px;
       width: 15px;
-      color: #BBC4C3;
+      color: $color-secondary;
     }
   }
 
@@ -54,14 +44,6 @@
     padding-top: 15px;
 
     img {
-      &:focus {
-        outline: 0;
-      }
-
-      &:hover {
-        filter: invert(52%) sepia(44%) saturate(699%) hue-rotate(137deg) brightness(95%) contrast(81%);
-      }
-
       &:last-child {
         margin-left: 25px;
       }
@@ -70,10 +52,6 @@
 
   .name {
     grid-column: 1/4;
-    color: #BBC4C3;
-    font-family: Lato;
-    font-size: 18px;
-    font-weight: bold;
     text-align: center;
   }
 }

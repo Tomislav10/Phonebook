@@ -1,3 +1,5 @@
+@import '../../../styles/variables';
+
 .dialog {
   position: fixed;
   top: 331px;
@@ -21,8 +23,6 @@
     .title {
       padding-top: 20px;
       padding-left: 30px;
-      color: #BBC4C3;
-      font-family: Lato-Bold;
     }
 
     .divider {
@@ -37,8 +37,6 @@
       padding-top: 29px;
       padding-bottom: 50px;
       margin: 0 auto;
-      color: #BBC4C3;
-      font-family: Lato;
     }
 
     .button-container {
@@ -46,28 +44,20 @@
       grid-template-columns: repeat(2, 50%);
 
       button {
-        &:hover {
-          cursor: pointer;
-        }
-        outline: 0;
-        border: none;
         height: 42px;
         width: 160px;
         border-radius: 28.5px;
-        color: #FFFFFF;
-        font-family: Lato-Bold;
-        font-size: 14px;
         text-align: center;
       }
 
       button:first-child {
         justify-self: center;
-        background-color: #BBC4C3;
+        background-color: $color-secondary;
       }
 
       button:last-child {
         justify-self: center;
-        background-color: #2DA1AD;
+        background-color: $color-primary;
       }
     }
   }

@@ -1,14 +1,11 @@
+@import '../../../styles/variables';
+
 .input-container {
   display: grid;
   .label {
     height: 41px;
     span {
-      margin-bottom: 22px;
       padding-left: 15px;
-      color: #2DA1AD;
-      font-family: Lato-Bold;
-      font-size: 16px;
-      font-weight: 400;
     }
   }
 
@@ -18,25 +15,18 @@
 
   .error-label {
     position: relative;
-
-    span {
-      font-family: Lato;
-      font-size: 11px;
-      position: absolute;
-      color: red;
-      top: 63px;
-    }
   }
 
   input {
     &:focus {
-      border: 1px solid #2DA1AD;
+      border: 1px solid $color-primary;
       outline: 0;
     }
+    text-transform: capitalize;
     box-sizing: border-box;
     height: 60px;
     width: 300px;
-    border: 1px solid #BBC4C3;
+    border: 1px solid $color-secondary;
     opacity: 0.4;
     border-radius: 4px;
     padding-left: 30px;

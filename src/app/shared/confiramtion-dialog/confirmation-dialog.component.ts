@@ -15,25 +15,25 @@ export class ConfirmationDialogComponent implements OnInit, OnDestroy {
     this.element = el.nativeElement;
   }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.dialogService.add(this);
   }
-  ngOnDestroy(): void {
+  public ngOnDestroy(): void {
     this.dialogService.remove(this.id);
     this.element.remove();
   }
 
-  open(): void {
+  public open(): void {
     this.element.style.display = 'block';
     document.body.classList.add('dialog-open');
   }
 
-  close(): void {
+  public close(): void {
     this.element.style.display = 'none';
     document.body.classList.remove('dialog-open');
   }
 
-  confirm(): void {
+  public confirm(): void {
     this.confirmDelete.emit(true);
     this.element.style.display = 'none';
     document.body.classList.remove('dialog-open');

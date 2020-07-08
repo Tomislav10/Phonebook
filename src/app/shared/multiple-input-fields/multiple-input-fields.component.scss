@@ -1,15 +1,10 @@
-.contact-container {
+@import '../../../styles/variables';
 
+.contact-container {
   .label {
     height: 41px;
-
     span {
-      margin-bottom: 22px;
       padding-left: 15px;
-      color: #2DA1AD;
-      font-family: Lato-Bold;
-      font-size: 16px;
-      font-weight: 400;
     }
   }
 
@@ -24,6 +19,7 @@
     }
 
     input {
+      text-transform: capitalize;
       &.number-type {
         width: 300px;
       }
@@ -38,14 +34,14 @@
       }
 
       &:focus {
-        border: 1px solid #2DA1AD;
+        border: 1px solid $color-primary;
         outline: 0;
       }
 
       justify-self: start;
       box-sizing: border-box;
       height: 60px;
-      border: 1px solid #BBC4C3;
+      border: 1px solid $color-secondary;
       opacity: 0.4;
       border-radius: 4px;
       padding-left: 30px;
@@ -53,14 +49,6 @@
 
     .error-label {
       position: relative;
-
-      span {
-        font-family: Lato;
-        font-size: 11px;
-        position: absolute;
-        color: red;
-        top: 63px;
-      }
     }
 
     .field-error {
@@ -72,19 +60,18 @@
     }
 
     .delete-button:hover ~ label > input {
-      border: 1px solid #2DA1AD !important;
+      border: 1px solid $color-primary !important;
     }
 
     .delete-button {
       &:hover {
-        cursor: pointer;
-        filter: invert(52%) sepia(65%) saturate(453%) hue-rotate(137deg) brightness(91%) contrast(90%);
+        filter: $color-primary-filter;
       }
 
       margin-top: 14.5px;
       height: 31px;
       width: 31px;
-      border: 1px solid #BBC4C3;
+      border: 1px solid $color-secondary;
       border-radius: 50%;
 
       img {
@@ -108,7 +95,7 @@
     .add-button {
       height: 31px;
       width: 31px;
-      border: 1px solid #2DA1AD;
+      border: 1px solid $color-primary;
       border-radius: 50%;
 
       img {
@@ -116,16 +103,13 @@
         width: 8px;
         margin: 11.2px 0 0 11.2px;
         transform: rotate(45deg);
-        filter: invert(52%) sepia(65%) saturate(453%) hue-rotate(137deg) brightness(91%) contrast(90%);
+        filter: $color-primary-filter;
       }
     }
 
     span {
       padding-left: 15px;
       margin-top: 8px;
-      color: #2DA1AD;
-      font-family: Lato;
-      font-size: 14px;
     }
   }
 }

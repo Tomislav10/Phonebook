@@ -1,3 +1,5 @@
+@import '../../../styles/variables';
+
 .phonebook-items {
   margin: 0 auto;
   width: 1170px;
@@ -13,19 +15,19 @@
   height: 60px;
   padding-top: 59px;
   padding-bottom: 61px;
-  i {
-    padding: 23px 23px 19px 23px;
+  img {
+    padding: 21px 23px 19px 23px;
     position: absolute;
     height: 18px;
     width: 17px;
-    color: #BBC4C3;
+    color: $color-secondary;
   }
   input {
     &:focus {
       outline: 0;
     }
     font: 18px Lato;
-    color: #BBC4C3;
+    color: $color-secondary;
     width: 540px;
     height: 60px;
     box-sizing: border-box;

@@ -17,7 +17,7 @@ export class ContactDetailsComponent {
     private store: Store<PhonebookState>,
   ) {}
 
-  public setItemFavorite(contact) {
+  public setItemFavorite(contact): void {
     this.store.dispatch(new UpdateItem(
       {id: contact.id, data: {...contact, favorite: !contact.favorite }})
     );

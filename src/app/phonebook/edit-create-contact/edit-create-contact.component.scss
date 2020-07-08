@@ -1,32 +1,52 @@
+@import '../../../styles/variables';
+
 .item-container {
   margin: 0 auto;
   display: grid;
   width: 847px;
   grid-template-columns: 217px 630px;
 
-  .upload-image {
-    &:hover {
-      cursor: pointer;
-    }
+  .profile-photo {
+    position: relative;
     margin-top: 57px;
-    border-radius: 50%;
-    box-sizing: border-box;
-    height: 186px;
-    width: 186px;
-
-    .upload-icon {
-      margin: 83px 0 0 82px;
-      height: 21px;
-      width: 20px;
+    .overlay-svg {
+      position: absolute;
+      height: 186px;
+      width: 186px;
+      z-index: 50;
+      border-radius: 50%;
+      box-sizing: border-box;
+      border: 3px solid rgba(187,196,195,0.3);
+      background-color: rgba(0,0,0,0.4);
+      img {
+        margin: 86px 0 0 86px;
+      }
     }
 
-    .image {
-      margin: 3px 0 0 3px;
+    .upload-image {
+      position: absolute;
+      height: 186px;
+      width: 186px;
       border-radius: 50%;
-      height: 180px;
-      width: 180px;
+      box-sizing: border-box;
+
+      .upload-icon {
+        margin: 83px 0 0 82px;
+        height: 21px;
+        width: 20px;
+      }
+
+      .image {
+        position: absolute;
+        left: 0;
+        margin: 3px 0 0 3px;
+        border-radius: 50%;
+        height: 180px;
+        width: 180px;
+      }
     }
   }
+
 
   .form-container {
     margin-top: 112px;
@@ -38,27 +58,16 @@
       display: grid;
       grid-template-columns: 559px auto;
 
-
       img {
         padding-left: 8px;
-        &:hover {
-          cursor: pointer;
-          filter: invert(52%) sepia(44%) saturate(699%) hue-rotate(137deg) brightness(95%) contrast(81%);
-        }
-        &:focus {
-          outline: 0;
-        }
       }
       div {
         display: flex;
         &:hover {
           cursor: pointer;
-          filter: invert(52%) sepia(44%) saturate(699%) hue-rotate(137deg) brightness(95%) contrast(81%);
+          filter: $color-primary-filter;
         }
         span {
-          color: #BBC4C3;
-          font-family: Lato;
-          font-size: 14px;
           width: 30px;
         }
         img {
@@ -76,7 +85,7 @@
       .divider {
         height: 2px;
         width: 630px;
-        background-color: #2DA1AD;
+        background-color: $color-primary;
       }
 
       .input-field {
@@ -90,28 +99,20 @@
         margin-bottom: 80px;
 
         button {
-          &:hover {
-            cursor: pointer;
-          }
-          outline: 0;
-          border: none;
           height: 42px;
           width: 160px;
           border-radius: 28.5px;
-          color: #FFFFFF;
-          font-family: Lato-Bold;
-          font-size: 14px;
           text-align: center;
         }
 
         button:first-child {
           justify-self: start;
-          background-color: #BBC4C3;
+          background-color: $color-secondary;
         }
 
         button:last-child {
           justify-self: end;
-          background-color: #2DA1AD;
+          background-color: $color-primary;
         }
       }
     }

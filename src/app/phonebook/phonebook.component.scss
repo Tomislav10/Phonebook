@@ -1,3 +1,5 @@
+@import '../../styles/variables';
+
 .phonebook-container {
   display: grid;
 
@@ -9,7 +11,7 @@
     padding-top: 50px;
 
     .active-list {
-      color: #2DA1AD;
+      color: $color-primary;
     }
 
     span {
@@ -19,17 +21,11 @@
         &:focus {
           outline: 0;
         }
-        color: #BBC4C3;
-        font-family: Lato;
-        font-size: 18px;
-        font-weight: bold;
-        letter-spacing: 0;
-        line-height: 22px;
         text-align: center;
     }
 
     :nth-child(even) {
-      background-color: #BBC4C3;
+      background-color: $color-secondary;
       justify-self: center;
       margin-top: 4px;
       height: 15px;
@@ -42,8 +38,6 @@
     width: 1260px;
     justify-self: center;
     box-sizing: border-box;
-    border: 1px solid #2DA1AD;
+    border: 1px solid $color-primary;
   }
 }
-
-// grid-auto-rows: minmax(100px, auto);

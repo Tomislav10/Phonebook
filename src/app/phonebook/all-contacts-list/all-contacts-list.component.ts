@@ -22,7 +22,7 @@ export class AllContactsListComponent implements OnInit {
 
   constructor(private store: Store<PhonebookState>) {}
 
-  ngOnInit() {
+  public ngOnInit(): void {
     this.filteredContacts$ = combineLatest([this.allContacts$, this.ngForm.form.valueChanges])
       .pipe(
         map(

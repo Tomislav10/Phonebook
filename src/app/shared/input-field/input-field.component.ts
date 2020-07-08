@@ -1,4 +1,4 @@
-import {Component, EventEmitter, forwardRef, Input, Output} from '@angular/core';
+import {Component, EventEmitter, forwardRef, Input, OnDestroy, Output} from '@angular/core';
 import {
   AbstractControl,
   ControlValueAccessor,
@@ -8,6 +8,8 @@ import {
   Validators
 } from '@angular/forms';
 import {SharedService} from '../shared.service';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
 
 @Component({
   selector: 'app-input-field',
@@ -26,7 +28,7 @@ import {SharedService} from '../shared.service';
     }
   ]
 })
-export class InputFieldComponent implements ControlValueAccessor, Validator {
+export class InputFieldComponent implements OnDestroy, ControlValueAccessor, Validator {
   @Output()
   private readonly blur = new EventEmitter();
 
@@ -48,19 +50,20 @@ export class InputFieldComponent implements ControlValueAccessor, Validator {
 
   @Input() public imgSrc: string;
 
+  private unsubscribe$ = new Subject<void>();
   public readonly field: FormControl = new FormControl('', []);
 
   constructor(sharedService: SharedService) {
-    sharedService.touch.subscribe(() => {
+    sharedService.touch.pipe(takeUntil(this.unsubscribe$)).subscribe(() => {
       this.field.markAsTouched();
     });
   }
 
-  public writeValue(value: string | undefined) {
+  public writeValue(value: string | undefined): void {
     this.field.setValue(value || '');
   }
 
-  public registerOnChange(fn: (v: string) => void) {
+  public registerOnChange(fn: (v: string) => void): void {
     this.field.valueChanges.subscribe(fn);
   }
 
@@ -69,20 +72,17 @@ export class InputFieldComponent implements ControlValueAccessor, Validator {
   }
 
   public validate(): ValidationErrors | null {
-    if (this.field.valid) {
-      // tslint:disable-next-line:no-null-keyword
-      return null;
-    } else {
-      return {
-        invalidForm: { valid: false, message: 'Redirect uris fields are invalid' }
-      };
-    }
+    return this.field.valid ? null : {invalidForm: {valid: false}};
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 }
 
 function isValidEmail(control: AbstractControl): ValidationErrors | null {
   if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(control.value) || !control.value.length) {
-    // eslint-disable-next-line no-null/no-null
     return null;
   }
   return {notValidEmail: true};

@@ -22,7 +22,7 @@ export class FavoriteContactsListComponent implements OnInit {
 
   constructor(private store: Store<PhonebookState>) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.filteredContacts$ = combineLatest([this.favoriteContacts$, this.ngForm.form.valueChanges])
       .pipe(
         map(

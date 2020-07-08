@@ -9,20 +9,20 @@ export class DialogService {
   constructor() {
   }
 
-  add(dialog: any) {
+  public add(dialog: any): void {
     this.dialog.push(dialog);
   }
 
-  remove(id: string) {
+  public remove(id: string): void {
     this.dialog = this.dialog.filter(x => x.id !== id);
   }
 
-  open(id: string) {
+  public open(id: string): void {
     const dialog: any = this.dialog.filter(x => x.id === id)[0];
     dialog.open();
   }
 
-  close(id: string) {
+  public close(id: string): void {
     const dialog: any = this.dialog.filter(x => x.id === id)[0];
     dialog.close();
   }

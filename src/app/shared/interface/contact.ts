@@ -4,7 +4,7 @@ export interface Contact {
   email: string;
   favorite: boolean;
   contacts: PhoneNumbers[];
-  img: string | ArrayBuffer;
+  img?: string | ArrayBuffer;
 }
 
 export interface PhoneNumbers {

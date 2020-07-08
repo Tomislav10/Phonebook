@@ -1,11 +1,14 @@
-/* You can add global styles to this file, and also import other style files */
 @import "~@fortawesome/fontawesome-free/css/all.css";
 @import 'fonts';
+@import 'variables';
+@import 'elements/clickable';
+@import 'elements/text';
 
 app-confirmation-dialog {
   display: none;
 }
 
 body.dialog-open {
-  overflow: hidden;
+  // UNCOMMENT THIS LINE TO DISABLE SCROLL WHILE THE DIALOG IS OPEN
+  // overflow: hidden;
 }

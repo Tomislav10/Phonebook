@@ -18,17 +18,17 @@ export class ContactItemComponent {
 
   @Input() contact: Contact;
 
-  public setItemFavorite() {
+  public setItemFavorite(): void {
     this.store.dispatch(new UpdateItem(
       {id: this.contact.id, data: {...this.contact, favorite: !this.contact.favorite }})
     );
   }
 
-  public openDialog(id: string) {
+  public openDialog(id: string): void {
     this.dialogService.open(id);
   }
 
-  public confirmDelete(event: boolean) {
+  public confirmDelete(): void {
     this.store.dispatch(new DeleteItem({id: this.contact.id}));
   }
 }

@@ -1,12 +1,20 @@
 <div class="input-container">
   <div class="label">
     <img [src]=imgSrc>
-    <span>{{ label }}</span>
+    <span class="label-text">{{ label }}</span>
   </div>
   <label for="customInput" class="error-label">
-    <span *ngIf="field.touched && field.hasError('required');else email">{{label}} is required</span>
+    <span
+      class="error-text"
+      *ngIf="field.touched && field.hasError('required');else email">
+      {{label}} is required
+    </span>
     <ng-template #email>
-      <span *ngIf="field.touched && field.hasError('notValidEmail')">Email is not valid</span>
+      <span
+        class="error-text"
+        *ngIf="field.touched && field.hasError('notValidEmail')">
+        Email is not valid
+      </span>
     </ng-template>
     <input
       id="customInput"

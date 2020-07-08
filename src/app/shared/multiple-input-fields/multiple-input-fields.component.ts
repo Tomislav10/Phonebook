@@ -1,7 +1,6 @@
-import {Component, EventEmitter, forwardRef, Input, Output} from '@angular/core';
+import {Component, EventEmitter, forwardRef, OnDestroy, Output} from '@angular/core';
 import {
   AbstractControl,
-  ControlContainer,
   ControlValueAccessor,
   FormArray,
   FormControl,
@@ -14,6 +13,8 @@ import {
 } from '@angular/forms';
 import {PhoneNumbers} from '../interface/contact';
 import {SharedService} from '../shared.service';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
 
 @Component({
   selector: 'app-multiple-input-fields',
@@ -32,13 +33,15 @@ import {SharedService} from '../shared.service';
     }
   ]
 })
-export class MultipleInputFieldsComponent implements ControlValueAccessor, Validator {
-  public readonly form: FormArray = new FormArray([], [Validators.required]);
+export class MultipleInputFieldsComponent implements OnDestroy, ControlValueAccessor, Validator {
   @Output()
   private readonly blur = new EventEmitter();
 
+  private unsubscribe$ = new Subject<void>();
+  public readonly form: FormArray = new FormArray([], [Validators.required]);
+
   constructor(sharedService: SharedService) {
-    sharedService.touch.subscribe(() => {
+    sharedService.touch.pipe(takeUntil(this.unsubscribe$)).subscribe(() => {
       this.form.controls.forEach((data: FormGroup) => {
         data.controls.number.markAsTouched();
         data.controls.label.markAsTouched();
@@ -46,11 +49,11 @@ export class MultipleInputFieldsComponent implements ControlValueAccessor, Valid
     });
   }
 
-  public writeValue(value: PhoneNumbers[] | undefined) {
-    const arr: AbstractControl[] = [];
+  public writeValue(value: PhoneNumbers[] | undefined): void {
+    const numberOfFilds = 3;
     if (value) {
       value.map(contact => {
-        return arr.push(
+        return this.form.push(
           new FormGroup({
             number: new FormControl(contact.number, [Validators.required, isValidPhoneNumber]),
             label: new FormControl(contact.label, [Validators.required])
@@ -58,24 +61,18 @@ export class MultipleInputFieldsComponent implements ControlValueAccessor, Valid
         );
       });
     } else {
-      arr.push(
-        new FormGroup({
-          number: new FormControl('', [Validators.required, isValidPhoneNumber]),
-          label: new FormControl('', [Validators.required])
-        })
-      );
-    }
-
-    while (this.form.length !== 0) {
-      this.form.removeAt(0);
-    }
-
-    if (arr && arr.length) {
-      arr.forEach(c => this.form.push(c));
+      while (numberOfFilds !== this.form.length) {
+        this.form.push(
+          new FormGroup({
+            number: new FormControl('', [Validators.required, isValidPhoneNumber]),
+            label: new FormControl('', [Validators.required])
+          })
+        );
+      }
     }
   }
 
-  public registerOnChange(fn: (v: string) => void) {
+  public registerOnChange(fn: (v: string) => void): void {
     this.form.valueChanges.subscribe(fn);
   }
 
@@ -83,11 +80,11 @@ export class MultipleInputFieldsComponent implements ControlValueAccessor, Valid
     this.blur.subscribe(cb);
   }
 
-  public removeContact(index: number) {
+  public removeContact(index: number): void {
     this.form.removeAt(index);
   }
 
-  public addNewContact() {
+  public addNewContact(): void {
     this.form.push(
       new FormGroup({
         number: new FormControl('', [Validators.required, isValidPhoneNumber]),
@@ -99,12 +96,16 @@ export class MultipleInputFieldsComponent implements ControlValueAccessor, Valid
   public validate(): ValidationErrors | null {
     return this.form.valid ? null : {invalidForm: {valid: false}};
   }
+
+  ngOnDestroy(): void {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
+  }
 }
 
 
 function isValidPhoneNumber(control: AbstractControl): ValidationErrors | null {
   if (/^[+]*[(]{0,1}[0-9]{1,3}[)]{0,1}[-\s\./0-9]*$/g.test(control.value) && control.value.length > 7) {
-    // eslint-disable-next-line no-null/no-null
     return null;
   }
   return {notValidPhoneNumber: true};

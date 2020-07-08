@@ -1,3 +1,5 @@
+@import '../../../styles/variables';
+
 .item-container {
   margin: 0 auto;
   display: grid;
@@ -25,21 +27,10 @@
       grid-template-columns: 45px 512px 15px 21px;
 
       i {
-        &:hover {
-          color: #2DA1AD;
-          cursor: pointer;
-        }
-        color: #BBC4C3;
+        color: $color-secondary;
       }
 
       img {
-        &:hover {
-          cursor: pointer;
-          filter: invert(52%) sepia(44%) saturate(699%) hue-rotate(137deg) brightness(95%) contrast(81%);
-        }
-        &:focus {
-          outline: 0;
-        }
         &:nth-child(1) {
           padding-left: 8px;
         }
@@ -51,17 +42,13 @@
 
       span {
         margin-top: -10px;
-        color: #BBC4C3;
-        font-family: Lato-Bold;
-        font-size: 28px;
       }
-
     }
 
     .divider {
       height: 2px;
       width: 630px;
-      background-color: #2DA1AD;
+      background-color: $color-primary;
     }
 
     .contact-info {
@@ -71,38 +58,20 @@
 
       img {
         margin-top: 6px;
-        filter: invert(52%) sepia(44%) saturate(699%) hue-rotate(137deg) brightness(95%) contrast(81%);
-      }
-
-      span {
-        color: #2DA1AD;
-        font-family: Lato-Bold;
-        &:last-child {
-          color: #BBC4C3;
-          font-family: Lato;
-        }
       }
     }
 
     .contact-info:last-child {
       padding-top: 71px;
       grid-template-columns: 30px 95px 100px auto;
-      grid-template-rows: repeat(7, 60px);
+      grid-template-rows: repeat(5, 60px);
 
-      img {
+      .contact-label-text, img {
         margin-top: 2px;
       }
 
       .phone-numbers {
-        color: #2DA1AD;
-        font-family: Lato-Bold;
         grid-row: 1/10;
-      }
-
-      span {
-        font-size: 16px;
-        color: #BBC4C3;
-        font-family: Lato;
       }
     }
   }

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {select, Store} from '@ngrx/store';
 import {ActivatedRoute, Data, Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
@@ -6,21 +6,24 @@ import {PhonebookState} from '../store';
 import {CreateItem, DeleteItem} from '../store/actions';
 import {Contact} from '../../shared/interface/contact';
 import {DialogService} from '../../shared/confiramtion-dialog/dialog.service';
-import {getAllContacts, getCurrentContact} from '../store/selector';
+import {getCurrentContact} from '../store/selector';
 import {SharedService} from '../../shared/shared.service';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
 
 @Component({
   selector: 'app-edit-create-contact',
   templateUrl: './edit-create-contact.component.html',
   styleUrls: ['./edit-create-contact.component.scss']
 })
-export class EditCreateContactComponent implements OnInit {
+export class EditCreateContactComponent implements OnInit, OnDestroy {
+
+  private unsubscribe$ = new Subject<void>();
 
   public contactForm: FormGroup;
-  public image;
+  public image?: string | ArrayBuffer;
 
   private readonly currentContact$ = this.store.pipe(select(getCurrentContact));
-  private readonly allContacts$ = this.store.pipe(select(getAllContacts));
   public mode: { edit?: boolean, create?: boolean };
   private currentContact?: Contact;
   private redirectId?: number;
@@ -32,14 +35,14 @@ export class EditCreateContactComponent implements OnInit {
     private sharedService: SharedService,
     private router: Router
   ) {
-    activeRoute.data.subscribe((data: Data) => this.mode = data);
+    activeRoute.data.pipe(takeUntil(this.unsubscribe$)).subscribe((data: Data) => this.mode = data);
     this.setForm();
   }
 
   ngOnInit(): void {
     if (this.mode.edit) {
-      this.currentContact$.subscribe((contact) => {
-        console.log('../../')
+      this.currentContact$.pipe(takeUntil(this.unsubscribe$))
+        .subscribe((contact) => {
         this.contactForm.setValue({name: contact.name, email: contact.email, contacts: contact.contacts});
         this.currentContact = contact;
         this.image = contact.img;
@@ -50,7 +53,7 @@ export class EditCreateContactComponent implements OnInit {
     }
   }
 
-  public submitForm() {
+  public submitForm(): void {
     this.sharedService.touch.next(true);
     const id = this.redirectId ? this.redirectId : this.currentContact.id;
     if (this.contactForm.valid) {
@@ -70,7 +73,7 @@ export class EditCreateContactComponent implements OnInit {
     });
   }
 
-  public updateProfilePhoto(event: Event) {
+  public updateProfilePhoto(event: Event): void {
     const file = event.target['files'][0];
     const reader = new FileReader();
     reader.readAsDataURL(file);
@@ -79,12 +82,21 @@ export class EditCreateContactComponent implements OnInit {
     };
   }
 
-  public openDialog(id: string) {
+  public removePhoto(): void {
+    this.image = undefined;
+  }
+
+  public openDialog(id: string): void {
     this.dialogService.open(id);
   }
 
-  public confirmDelete(event: boolean) {
+  public confirmDelete(event: boolean): void {
     this.store.dispatch(new DeleteItem({id: this.currentContact.id}));
     this.router.navigate(['../../']);
+  }
+
+  public ngOnDestroy(): void {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 }
